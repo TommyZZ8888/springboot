@@ -3,5 +3,5 @@ server:
     servlet:
         context-path: /demo
 spring:
-    profiles:
-        active: dev
+  application:
+      name: demo-logback

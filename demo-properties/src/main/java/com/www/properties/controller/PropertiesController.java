@@ -1,8 +1,8 @@
-package com.www.properties.module;
+package com.www.properties.controller;
 
 import cn.hutool.core.lang.Dict;
-import com.www.properties.module.domain.AppPropertiesEntity;
-import com.www.properties.module.domain.DevPropertiesEntity;
+import com.www.properties.domain.AppPropertiesEntity;
+import com.www.properties.domain.DevPropertiesEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

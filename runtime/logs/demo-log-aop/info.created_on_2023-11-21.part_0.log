@@ -1,0 +1,84 @@
+2023-11-21 15:49:45,532 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:55 - Starting DemoLogAopApplication using Java 11.0.15 on DESKTOP-STAACOU with PID 21800 (D:\test\github\springboot\demo-log-aop\target\classes started by DELL in D:\test\github\springboot)
+2023-11-21 15:49:45,536 [main] INFO  [com.www.log.aop.DemoLogAopApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2023-11-21 15:49:46,810 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-11-21 15:49:46,819 [main] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-11-21 15:49:46,819 [main] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-11-21 15:49:46,820 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
+2023-11-21 15:49:46,821 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2023-11-21 15:49:46,821 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
+2023-11-21 15:49:46,821 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2023-11-21 15:49:46,856 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2023-11-21 15:49:46,916 [main] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-11-21 15:49:46,917 [main] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1336 ms
+2023-11-21 15:49:47,808 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path '/demo'
+2023-11-21 15:49:47,836 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:61 - Started DemoLogAopApplication in 3.119 seconds (JVM running for 4.228)
+2023-11-21 15:50:25,174 [http-nio-8080-exec-1] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-21 15:50:25,175 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2023-11-21 15:50:25,176 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 1 ms
+2023-11-21 15:50:25,208 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:51 - aop-log: before
+2023-11-21 15:50:25,233 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:88 - aop-log: AfterReturning
+2023-11-21 15:50:25,294 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:82 - Request Log Info : {"classMethod":"com.www.log.aop.controller.IndexController.test","os":"WINDOWS_10","ip":"0:0:0:0:0:0:0:1","requestParams":{},"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36","httpMethod":"GET","threadName":"com.www.log.aop.controller.IndexController.test","url":"http://localhost:8080/demo/test","threadId":"37","result":{"who":"me"},"browser":"CHROME11","timeCost":37}
+2023-11-21 15:54:03,452 [http-nio-8080-exec-4] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:51 - aop-log: before
+2023-11-21 15:54:03,453 [http-nio-8080-exec-4] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:88 - aop-log: AfterReturning
+2023-11-21 15:54:17,526 [http-nio-8080-exec-4] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:82 - Request Log Info : {"classMethod":"com.www.log.aop.controller.IndexController.test","os":"WINDOWS_10","ip":"0:0:0:0:0:0:0:1","requestParams":{},"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36","httpMethod":"GET","threadName":"com.www.log.aop.controller.IndexController.test","url":"http://localhost:8080/demo/test","threadId":"40","result":{"who":"me"},"browser":"CHROME11","timeCost":14073}
+2023-11-21 15:55:23,948 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:55 - Starting DemoLogAopApplication using Java 11.0.15 on DESKTOP-STAACOU with PID 23636 (D:\test\github\springboot\demo-log-aop\target\classes started by DELL in D:\test\github\springboot)
+2023-11-21 15:55:23,950 [main] INFO  [com.www.log.aop.DemoLogAopApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2023-11-21 15:55:24,616 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-11-21 15:55:24,623 [main] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-11-21 15:55:24,624 [main] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-11-21 15:55:24,625 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
+2023-11-21 15:55:24,625 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2023-11-21 15:55:24,625 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
+2023-11-21 15:55:24,625 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2023-11-21 15:55:24,627 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2023-11-21 15:55:24,687 [main] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-11-21 15:55:24,689 [main] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 707 ms
+2023-11-21 15:55:25,071 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path '/demo'
+2023-11-21 15:55:25,080 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:61 - Started DemoLogAopApplication in 1.476 seconds (JVM running for 2.131)
+2023-11-21 15:55:33,755 [http-nio-8080-exec-1] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-21 15:55:33,756 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2023-11-21 15:55:33,757 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 0 ms
+2023-11-21 15:55:33,775 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:51 - aop-log: before
+2023-11-21 15:55:33,784 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:88 - aop-log: AfterReturning
+2023-11-21 15:55:47,747 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:82 - Request Log Info : {"classMethod":"com.www.log.aop.controller.IndexController.test","os":"WINDOWS_10","ip":"0:0:0:0:0:0:0:1","requestParams":{},"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36","httpMethod":"GET","threadName":"com.www.log.aop.controller.IndexController.test","url":"http://localhost:8080/demo/test","threadId":"36","result":{"who":"me"},"browser":"CHROME11","timeCost":13947}
+2023-11-21 15:56:15,180 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:55 - Starting DemoLogAopApplication using Java 11.0.15 on DESKTOP-STAACOU with PID 23916 (D:\test\github\springboot\demo-log-aop\target\classes started by DELL in D:\test\github\springboot)
+2023-11-21 15:56:15,182 [main] INFO  [com.www.log.aop.DemoLogAopApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2023-11-21 15:56:15,809 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-11-21 15:56:15,815 [main] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-11-21 15:56:15,815 [main] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-11-21 15:56:15,816 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
+2023-11-21 15:56:15,817 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2023-11-21 15:56:15,817 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
+2023-11-21 15:56:15,817 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2023-11-21 15:56:15,819 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2023-11-21 15:56:15,873 [main] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-11-21 15:56:15,874 [main] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 660 ms
+2023-11-21 15:56:16,260 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path '/demo'
+2023-11-21 15:56:16,268 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:61 - Started DemoLogAopApplication in 1.422 seconds (JVM running for 2.061)
+2023-11-21 15:56:19,733 [http-nio-8080-exec-1] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-21 15:56:19,734 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2023-11-21 15:56:19,734 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 0 ms
+2023-11-21 15:56:19,754 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:51 - aop-log: before
+2023-11-21 15:56:19,763 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:88 - aop-log: AfterReturning
+2023-11-21 15:58:52,710 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:82 - Request Log Info : {"classMethod":"com.www.log.aop.controller.IndexController.test","os":"WINDOWS_10","ip":"0:0:0:0:0:0:0:1","requestParams":{},"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36","httpMethod":"GET","threadName":"com.www.log.aop.controller.IndexController.test","url":"http://localhost:8080/demo/test","threadId":"36","result":{"who":"me"},"browser":"CHROME11","timeCost":152934}
+2023-11-21 15:59:07,982 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:55 - Starting DemoLogAopApplication using Java 11.0.15 on DESKTOP-STAACOU with PID 14988 (D:\test\github\springboot\demo-log-aop\target\classes started by DELL in D:\test\github\springboot)
+2023-11-21 15:59:07,984 [main] INFO  [com.www.log.aop.DemoLogAopApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2023-11-21 15:59:08,619 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2023-11-21 15:59:08,625 [main] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2023-11-21 15:59:08,625 [main] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-11-21 15:59:08,626 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
+2023-11-21 15:59:08,626 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2023-11-21 15:59:08,627 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
+2023-11-21 15:59:08,627 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2023-11-21 15:59:08,629 [main] INFO  [org.apache.catalina.core.AprLifecycleListener] DirectJDKLog.java:173 - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2023-11-21 15:59:08,671 [main] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2023-11-21 15:59:08,671 [main] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 656 ms
+2023-11-21 15:59:09,078 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path '/demo'
+2023-11-21 15:59:09,086 [main] INFO  [com.www.log.aop.DemoLogAopApplication] StartupInfoLogger.java:61 - Started DemoLogAopApplication in 1.462 seconds (JVM running for 2.098)
+2023-11-21 15:59:18,443 [http-nio-8080-exec-1] INFO  [o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-21 15:59:18,444 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2023-11-21 15:59:18,444 [http-nio-8080-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 0 ms
+2023-11-21 15:59:18,462 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:51 - aop-log: before
+2023-11-21 15:59:18,471 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:88 - aop-log: AfterReturning
+2023-11-21 15:59:18,472 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:107 - aop-log: after
+2023-11-21 15:59:18,503 [http-nio-8080-exec-1] INFO  [com.www.log.aop.aspectj.AopLog] AopLog.java:82 - Request Log Info : {"classMethod":"com.www.log.aop.controller.IndexController.test","os":"WINDOWS_10","ip":"0:0:0:0:0:0:0:1","requestParams":{},"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36","httpMethod":"GET","threadName":"com.www.log.aop.controller.IndexController.test","url":"http://localhost:8080/demo/test","threadId":"37","result":{"who":"me"},"browser":"CHROME11","timeCost":21}

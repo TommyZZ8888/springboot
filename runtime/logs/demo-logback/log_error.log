@@ -1,0 +1,8 @@
+2023-11-21 14:47:57.508 [main] ERROR com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
+2023-11-21 14:47:57.509 [main] ERROR com.example.logback.DemoLogbackApplication - 【SpringBootDemoLogbackApplication】启动异常：
+java.lang.ArithmeticException: / by zero
+	at com.example.logback.DemoLogbackApplication.main(DemoLogbackApplication.java:22)
+2023-11-21 14:50:01.099 [main] ERROR com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
+2023-11-21 14:50:01.101 [main] ERROR com.example.logback.DemoLogbackApplication - 【SpringBootDemoLogbackApplication】启动异常：
+java.lang.ArithmeticException: / by zero
+	at com.example.logback.DemoLogbackApplication.main(DemoLogbackApplication.java:22)

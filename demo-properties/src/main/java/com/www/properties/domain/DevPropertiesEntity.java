@@ -1,4 +1,4 @@
-package com.www.properties.module.domain;
+package com.www.properties.domain;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

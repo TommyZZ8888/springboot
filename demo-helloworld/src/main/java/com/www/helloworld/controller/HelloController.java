@@ -1,4 +1,4 @@
-package com.www.helloworld.module;
+package com.www.helloworld.controller;
 
 import cn.hutool.core.util.StrUtil;
 import org.springframework.util.StringUtils;

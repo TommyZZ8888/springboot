@@ -1,0 +1,5 @@
+2023-11-21 14:42:53.986 [main] WARN  com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
+2023-11-21 14:43:49.434 [main] WARN  com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
+2023-11-21 14:44:17.547 [main] WARN  com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
+2023-11-21 14:44:27.234 [main] WARN  com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
+2023-11-21 14:44:47.764 [main] WARN  com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
