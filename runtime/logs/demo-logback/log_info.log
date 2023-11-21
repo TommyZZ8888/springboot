@@ -1,0 +1,15 @@
+2023-11-21 16:10:07.391 [main] INFO  com.example.logback.DemoLogbackApplication - Starting DemoLogbackApplication using Java 11.0.15 on DESKTOP-STAACOU with PID 24040 (D:\test\github\springboot\demo-logback\target\classes started by DELL in D:\test\github\springboot)
+2023-11-21 16:10:07.395 [main] INFO  com.example.logback.DemoLogbackApplication - No active profile set, falling back to default profiles: default
+2023-11-21 16:10:08.031 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-11-21 16:10:08.040 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-11-21 16:10:08.041 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-11-21 16:10:08.043 [main] INFO  org.apache.catalina.core.AprLifecycleListener - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
+2023-11-21 16:10:08.043 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2023-11-21 16:10:08.043 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
+2023-11-21 16:10:08.043 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2023-11-21 16:10:08.046 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2023-11-21 16:10:08.373 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/demo] - Initializing Spring embedded WebApplicationContext
+2023-11-21 16:10:08.374 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 933 ms
+2023-11-21 16:10:09.000 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/demo'
+2023-11-21 16:10:09.014 [main] INFO  com.example.logback.DemoLogbackApplication - Started DemoLogbackApplication in 1.923 seconds (JVM running for 2.786)
+2023-11-21 16:10:09.017 [main] INFO  com.example.logback.DemoLogbackApplication - Spring boot启动初始化了 137 个 Bean
