@@ -2,24 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <artifactId>demo-springboot</artifactId>
+        <groupId>com.www</groupId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.www</groupId>
-    <artifactId>demo-exception-handle</artifactId>
+
+    <artifactId>demo-exception-handler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo-exception-handle</name>
-    <description>demo-exception-handle</description>
+    <name>demo-exception-handler</name>
+
+    <description>demo-exception-handler</description>
+    <packaging>jar</packaging>
     <properties>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <dependency>
@@ -34,11 +44,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                    </image>
-                </configuration>
             </plugin>
         </plugins>
     </build>
