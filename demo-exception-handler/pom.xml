@@ -16,7 +16,7 @@
     <description>demo-exception-handler</description>
     <packaging>jar</packaging>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
