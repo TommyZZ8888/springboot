@@ -2,3 +2,10 @@ server:
     port: 8080
     servlet:
         context-path: /demo
+spring:
+    thymeleaf:
+        encoding: UTF-8
+        mode: HTML
+        servlet:
+            content-type: text/html
+        cache: false
