@@ -33,7 +33,7 @@
         <java.version>21</java.version>
         <spring.boot.version>3.1.1</spring.boot.version>
         <mysql.version>8.0.27</mysql.version>
-        <hutool.version>5.4.5</hutool.version>
+        <hutool.version>5.8.16</hutool.version>
         <guava.version>29.0-jre</guava.version>
     </properties>
 
@@ -70,6 +70,12 @@
                 <version>1.18.30</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>2.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
