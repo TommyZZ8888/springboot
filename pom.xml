@@ -28,6 +28,8 @@
         <module>demo-template-freemarker</module>
         <module>demo-orm-jdbctemplate</module>
         <module>demo-orm-jpa</module>
+        <module>demo-orm-mybatis</module>
+        <module>demo-orm-mybatis-mapper-page</module>
     </modules>
 
     <properties>
