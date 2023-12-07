@@ -1,0 +1,16 @@
+spring:
+    servlet:
+        multipart:
+            enabled: true
+            location: /Users/tommy/Document/code/back-end/spring-boot-demo/upload/temp
+            file-size-threshold: 5MB
+            max-file-size: 20MB
+server:
+    port: 8080
+    servlet:
+        context-path: /demo
+qiniu:
+    accessKey: 123
+    secretKey: 123
+    bucket: 123
+    prefix: 123
