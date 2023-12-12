@@ -32,6 +32,7 @@
         <module>demo-orm-mybatis-mapper-page</module>
         <module>demo-orm-mybatis-plus</module>
         <module>demo-upload</module>
+        <module>demo-cache-redis</module>
     </modules>
 
     <properties>
