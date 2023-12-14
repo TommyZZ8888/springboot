@@ -1,0 +1,8 @@
+spring:
+    cache:
+        type: jcache
+        jcache:
+            config: classpath:ehcache.xml
+logging:
+    level:
+        com.www: debug

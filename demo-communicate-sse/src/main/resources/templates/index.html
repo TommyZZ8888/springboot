@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sse测试文档</title>
+</head>
+<body>
+<div>sse测试</div>
+<div id="data"></div>
+</body>
+</html>
+<script>
+    var source = new EventSource('http://localhost:8080/demo/sse/createConnect?clientId=ddz');
+    source.onmessage = function (event) {
+        text = document.getElementById('data').innerText;
+        text += '\n' + event.data;
+        document.getElementById('data').innerText = text;
+    };
+
+    <!-- 添加一个开启回调 -->
+    source.onopen = function (event) {
+        text = document.getElementById('data').innerText;
+        text += '\n 开启: ';
+        console.log(event);
+        document.getElementById('data').innerText = text;
+    };
+</script>
+

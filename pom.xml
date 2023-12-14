@@ -33,6 +33,8 @@
         <module>demo-orm-mybatis-plus</module>
         <module>demo-upload</module>
         <module>demo-cache-redis</module>
+        <module>demo-cache-ehcache</module>
+        <module>demo-communicate-sse</module>
     </modules>
 
     <properties>

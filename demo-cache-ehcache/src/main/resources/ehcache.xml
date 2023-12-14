@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
+
+    <!-- 持久化路径 -->
+    <persistence directory="D:/ehcache_data"/>
+
+    <!-- 缓存模版,此处为了显示其用法,也可以不用模版直接在cache中配置与模版参数相同 -->
+    <cache-template name="user_temp">
+        <!-- 设置缓存对象中key、value 的类型为String，如果没有指定则默认为java.lang.Object -->
+        <key-type>java.lang.Long</key-type>
+        <value-type>com.www.cache.ehcache.entity.User</value-type>
+        <expiry>
+            <!-- 单位默认为秒当用秒作单位时,可以不填-->
+            <ttl unit="hours">1</ttl>
+        </expiry>
+        <resources>
+            <!--设置该缓存在堆上可持有2000个实体(键值对) -->
+            <heap unit="entries">500</heap>
+            <!--最大可持有500MB的堆外内存 -->
+            <offheap unit="MB">500</offheap>
+        </resources>
+    </cache-template>
+
+    <!-- 缓存对象,如果使用了模版会覆盖模版中的内容,使用uses-template=""来引用模版 -->
+    <cache alias="user" uses-template="user_temp">
+        <expiry>
+            <!--此处会覆盖模版中的(TTL)配置 -->
+            <tti>60</tti>
+        </expiry>
+        <resources>
+            <!--存储在磁盘-->
+            <disk unit="MB" persistent="true">500</disk>
+        </resources>
+    </cache>
+
+
+</config>
