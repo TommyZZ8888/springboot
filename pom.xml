@@ -35,6 +35,7 @@
         <module>demo-cache-redis</module>
         <module>demo-cache-ehcache</module>
         <module>demo-communicate-sse</module>
+        <module>demo-email</module>
     </modules>
 
     <properties>

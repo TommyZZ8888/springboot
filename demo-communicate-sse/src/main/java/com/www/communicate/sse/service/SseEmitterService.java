@@ -126,11 +126,7 @@ public class SseEmitterService {
                 log.info("{}的第{}次消息重推成功,{}", clientId, i + 1, sseEmitterData.toString());
                 return;
             }
-
-
         }
-
-
     }
 
     /**
