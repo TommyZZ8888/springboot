@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.www</groupId>
-    <artifactId>demo-springboot</artifactId>
+    <artifactId>springboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot</name>
     <packaging>pom</packaging>
@@ -36,6 +36,7 @@
         <module>demo-cache-ehcache</module>
         <module>demo-communicate-sse</module>
         <module>demo-email</module>
+        <module>demo-socket</module>
     </modules>
 
     <properties>
