@@ -37,6 +37,7 @@
         <module>demo-communicate-sse</module>
         <module>demo-email</module>
         <module>demo-socket</module>
+        <module>demo-websocket</module>
     </modules>
 
     <properties>
