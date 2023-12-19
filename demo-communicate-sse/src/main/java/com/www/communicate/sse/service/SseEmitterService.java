@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
@@ -23,6 +24,8 @@ import java.util.function.Consumer;
 @Service
 @Slf4j
 public class SseEmitterService {
+
+
 
     public static final Map<String, SseEmitter> SSE_CACHE = new ConcurrentHashMap<>();
 
@@ -85,6 +88,17 @@ public class SseEmitterService {
         sendMsgToClientByClientId(clientId, sseEmitterData, getSseEmitterByClientId(clientId));
     }
 
+
+    public void test() throws IOException {
+        SseEmitter sseEmitter = SSE_CACHE.get("ddz");
+        SseEmitterData sseEmitterData = new SseEmitterData();
+        sseEmitterData.setName("name");
+        sseEmitterData.setClientId("ddz");
+        sseEmitterData.setData("sssss");
+        SseEmitter.SseEventBuilder sendData = SseEmitter.event().id(String.valueOf(HttpStatus.HTTP_OK))
+                .data(sseEmitterData, MediaType.APPLICATION_JSON);
+        sseEmitter.send(sendData);
+    }
     /**
      * 关闭连接
      * @param clientId

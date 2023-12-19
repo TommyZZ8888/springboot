@@ -13,7 +13,7 @@
 </body>
 </html>
 <script>
-    var source = new EventSource('http://localhost:8080/demo/sse/createConnect?clientId=ddz');
+    var source = new EventSource('http://localhost:8081/demo/sse/createConnect?clientId=ddz');
     source.onmessage = function (event) {
         text = document.getElementById('data').innerText;
         text += '\n' + event.data;

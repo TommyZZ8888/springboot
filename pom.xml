@@ -38,6 +38,8 @@
         <module>demo-email</module>
         <module>demo-socket</module>
         <module>demo-websocket</module>
+        <module>demo-task</module>
+        <module>demo-task-quartz</module>
     </modules>
 
     <properties>

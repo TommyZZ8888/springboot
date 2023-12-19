@@ -47,6 +47,10 @@ public class SSEController {
         sseEmitterService.closeConnect(clientId);
     }
 
+    @PostMapping("/test")
+    public void test() throws IOException {
+        sseEmitterService.test();
+    }
 
 
 
