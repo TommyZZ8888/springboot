@@ -40,6 +40,7 @@
         <module>demo-websocket</module>
         <module>demo-task</module>
         <module>demo-task-quartz</module>
+        <module>demo-task-xxl-job</module>
     </modules>
 
     <properties>
