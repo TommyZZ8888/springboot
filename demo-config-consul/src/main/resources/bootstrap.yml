@@ -1,0 +1,25 @@
+spring:
+    application:
+        name: spring-boot-consul-config
+    cloud:
+        consul:
+            config:
+                data-key: data
+                defaultContext: consul-config
+                enabled: true
+                fail-fast: false
+                format: properties
+                prefix: config
+                profileSeparator: ','
+            discovery:
+                deregister: true
+                enabled: true
+                health-check-critical-timeout: 5s
+                health-check-interval: 10s
+                health-check-url: http://localhost:8081/actuator/health
+                instance-id: ${spring.application.name}-001
+                prefer-ip-address: true
+                register: true
+                service-name: consul-config
+            host: 127.0.0.1
+            port: 8500

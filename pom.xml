@@ -41,6 +41,7 @@
         <module>demo-task</module>
         <module>demo-task-quartz</module>
         <module>demo-task-xxl-job</module>
+<!--        <module>demo-config-consul</module>-->
     </modules>
 
     <properties>
