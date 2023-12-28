@@ -4,15 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.www</groupId>
-        <artifactId>springboot</artifactId>
+        <artifactId>demo-orm-multiple-datasource</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>demo-orm-mybatis-plus</artifactId>
+    <artifactId>multiple-datasource-mybatis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo-orm-mybatis-plus</name>
 
-    <description>demo-orm-mybatis-plus</description>
+    <name>multiple-datasource-mybatis</name>
+    <description>multiple-datasource-mybatis</description>
     <packaging>jar</packaging>
 
     <properties>
@@ -24,21 +24,9 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
@@ -56,11 +44,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                    </image>
-                </configuration>
             </plugin>
         </plugins>
     </build>

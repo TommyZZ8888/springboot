@@ -1,0 +1,28 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /demo
+spring:
+    application:
+        name: multiple-datasource-mybatis-plus
+    datasource:
+        dynamic:
+            primary: master
+            strict: false
+            datasource:
+                master:
+                    url: jdbc:mysql://172.16.25.234/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
+                    username: root
+                    password: 123456
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+                slave:
+                    url: jdbc:mysql://127.0.0.1:3306/user?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
+                    username: root
+                    password: 123456
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+    mapper-locations: classpath:mapper/*.xml
+    type-aliases-package: com.www.multiple.datasource.mybatisplus.model.Test
+    configuration:
+        map-underscore-to-camel-case: true

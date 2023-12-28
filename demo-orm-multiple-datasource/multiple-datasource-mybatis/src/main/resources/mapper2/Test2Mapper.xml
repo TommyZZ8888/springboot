@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.multiple.datasource.mybatis.mapper2.Test2Mapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.www.multiple.datasource.mybatis.model.Test">
+        <result column="test2_id" property="test2Id" />
+        <result column="name" property="name" />
+        <result column="user_id" property="userId" />
+    </resultMap>
+
+    <insert id="insert">
+        insert into user.test2(test2_id, name, user_id) VALUES (REPLACE(uuid(),'-',''),'haha','sas')
+    </insert>
+    <select id="list" resultType="com.www.multiple.datasource.mybatis.model.Test">
+        select test2_id, name, user_id
+        from user.test2
+    </select>
+
+
+</mapper>

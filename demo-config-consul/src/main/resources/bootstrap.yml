@@ -9,8 +9,8 @@ spring:
                 enabled: true
                 fail-fast: false
                 format: properties
-                prefix: config
                 profileSeparator: ','
+                prefixes: config
             discovery:
                 deregister: true
                 enabled: true
