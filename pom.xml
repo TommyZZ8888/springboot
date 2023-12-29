@@ -43,6 +43,7 @@
         <module>demo-task-xxl-job</module>
         <module>demo-config-consul</module>
         <module>demo-orm-multiple-datasource</module>
+        <module>demo-file</module>
     </modules>
 
     <properties>

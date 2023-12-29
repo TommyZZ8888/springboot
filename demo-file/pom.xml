@@ -1,39 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.www</groupId>
         <artifactId>springboot</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>demo-orm-multiple-datasource</artifactId>
+    <artifactId>demo-file</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <modelVersion>4.0.0</modelVersion>
-
-    <name>demo-orm-multiple-datasource</name>
-    <description>demo-orm-multiple-datasource</description>
-    <packaging>pom</packaging>
+    <name>demo-file-download</name>
+    <description>demo-file</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>21</java.version>
     </properties>
-
-    <modules>
-        <module>multiple-datasource-mybatis</module>
-        <module>multiple-datasource-mybatisplus</module>
-        <module>multiple-datasource-shardingsphere</module>
-    </modules>
-
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -44,10 +31,21 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

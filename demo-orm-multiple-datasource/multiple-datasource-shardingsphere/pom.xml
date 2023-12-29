@@ -7,41 +7,21 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>demo-orm-multiple-datasource</artifactId>
+    <artifactId>multiple-datasource-shardingsphere</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <modelVersion>4.0.0</modelVersion>
+    <name>multiple-datasource-shardingsphere</name>
 
-    <name>demo-orm-multiple-datasource</name>
-    <description>demo-orm-multiple-datasource</description>
-    <packaging>pom</packaging>
+    <description>multiple-datasource-shardingsphere</description>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>21</java.version>
     </properties>
-
-    <modules>
-        <module>multiple-datasource-mybatis</module>
-        <module>multiple-datasource-mybatisplus</module>
-        <module>multiple-datasource-shardingsphere</module>
-    </modules>
-
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
         </dependency>
 
         <dependency>
