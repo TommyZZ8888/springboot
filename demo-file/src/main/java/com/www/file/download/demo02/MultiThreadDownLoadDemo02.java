@@ -1,5 +1,6 @@
 package com.www.file.download.demo02;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -9,6 +10,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.File;
@@ -24,7 +27,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Slf4j
 public class MultiThreadDownLoadDemo02 {
-    private static final long blockSize = 1024 * 1024;
+
+
+    private static final long blockSize = 1024*1024*2;
 
     private final URI uri;
 

@@ -13,8 +13,8 @@ import java.util.concurrent.CountDownLatch;
 public class DownLoadClient {
     public static void main(String[] args) {
         int threadSize = 2;
-        String serverPath = "https://pics1.baidu.com/feed/8644ebf81a4c510ff3d1252bb6f37e24d42aa51a.png";
-        String localPath = "demo-file/src/main/resources/static/stefanie.png";
+        String serverPath = "https://www.v2rayn-cn.com/v2rayN-With-Core.zip";
+        String localPath = "D:\\Program Files\\v2rayN\\v2rayN-With-Core.zip";
         CountDownLatch latch = new CountDownLatch(threadSize);
         MultiThreadDownLoadDemo01 downLoad = new MultiThreadDownLoadDemo01(threadSize, serverPath, localPath, latch);
         long startTime = System.currentTimeMillis();

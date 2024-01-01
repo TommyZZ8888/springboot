@@ -29,6 +29,7 @@ public class TalkReceive implements Runnable {
 
     @Override
     public void run() {
+
         while (true) {
             try {
                 byte[] buffer = new byte[1024];

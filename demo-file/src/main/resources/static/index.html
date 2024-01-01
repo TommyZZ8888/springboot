@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载</title>
+    <script src="jquery-3.5.1.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+            background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        }
+
+        .login-wrapper {
+            background-color: #fff;
+            width: 358px;
+            height: 588px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .input-item {
+            display: flex;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-item:placeholder {
+            text-transform: uppercase;
+        }
+
+        .button {
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+            background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+            color: #fff;
+            border: 2px solid white;
+            border-radius: 15px;
+        }
+
+        a {
+            text-decoration-line: none;
+            color: #abc1ee;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="login-wrapper">
+                <div class="header"></div></br>
+                <div class="form-wrapper">
+                    <input type="serverPath" id="serverPath" name="serverPath" placeholder="下载地址" class="input-item">
+                    <input type="localPath" id="localPath"  name="localPath" placeholder="本地地址" class="input-item">
+        <!--            <div class="btn">下载</div>-->
+                    <input id="button" class="button" type="button" value="下载">
+                </div>
+
+    </div>
+</div>
+
+<script>
+        $("#button").click(function() {
+            let serverPath = $("#serverPath").val();
+            let localPath = $("#localPath").val();
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/download',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                data: {
+                    serverPath: serverPath,
+                    localPath: localPath
+                },
+                dataType: 'JSON',
+                success: function (data, status) {
+                    var rstate = data.result;
+                    alert(data.data)
+                    if (rstate === "0") {
+                        if (rstate === "0") {
+                            alert('接口调用成功！');
+                        } else {
+                            alert('接口调用失败！');
+                        }
+                    }
+                },
+            })
+        })
+
+</script>
+</body>
+</html>

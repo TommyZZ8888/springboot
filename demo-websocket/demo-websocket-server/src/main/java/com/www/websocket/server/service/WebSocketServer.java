@@ -131,7 +131,7 @@ public class WebSocketServer {
     public void sendMessageByObject(Object message) {
         if (message != null) {
             try {
-                synchronized (session) {
+                synchronized (this.session) {
                     this.session.getBasicRemote().sendObject(message);
                 }
             } catch (IOException | EncodeException e) {

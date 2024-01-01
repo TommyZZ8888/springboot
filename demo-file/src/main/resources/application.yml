@@ -1,0 +1,7 @@
+server:
+    port: 8080
+spring:
+    thymeleaf:
+        prefix: classpath:/static/
+        suffix: .html
+        cache: false #????
