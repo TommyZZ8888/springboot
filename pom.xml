@@ -44,6 +44,7 @@
         <module>demo-config-consul</module>
         <module>demo-orm-multiple-datasource</module>
         <module>demo-file</module>
+        <module>demo-swagger</module>
     </modules>
 
     <properties>

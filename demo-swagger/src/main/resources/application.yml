@@ -1,0 +1,12 @@
+server:
+    port: 8080
+
+swagger:
+    enable: true
+    application-name: spring-boot-demo
+    application-version: 1.0.0.SNAPSHOT
+    application-description: this is a simple Swagger3 API demo
+spring:
+    mvc:
+        pathmatch:
+            matching-strategy: ant_path_matcher
