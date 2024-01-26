@@ -45,6 +45,7 @@
         <module>demo-orm-multiple-datasource</module>
         <module>demo-file</module>
         <module>demo-swagger</module>
+        <module>demo-rbac-security</module>
     </modules>
 
     <properties>
