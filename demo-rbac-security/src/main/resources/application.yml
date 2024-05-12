@@ -1,0 +1,52 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /demo
+spring:
+    datasource:
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/rbac?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    jpa:
+        show-sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: validate
+        open-in-view: true
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect
+    web:
+        resources:
+            add-mappings: true
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            timeout: 10000ms
+            lettuce:
+                pool:
+                    max-active: 8
+                    max-idle: 8
+                    max-wait: -1ms    # ??????????????????????? ?? -1
+                    min-idle: 0
+jwt:
+    config:
+        key: tommy
+        ttl: 600000
+        remember: 604800000
+
+custom:
+    config:
+        ignores:
+            # ????? post ??
+            post:
+                - "/api/auth/login"
+                - "/api/auth/logout"
+            # ????????????
+            pattern:
+                - "/test/*"
+
+
+
