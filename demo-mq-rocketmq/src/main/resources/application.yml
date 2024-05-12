@@ -1,0 +1,22 @@
+spring:
+  application:
+      name: demo-rocketmq
+server:
+    port: 9091
+#rocketmq????
+rocketmq:
+    #nameservice????????????????
+    name-server: 127.0.0.1:9876
+    #?????
+    producer:
+        #??
+        group: anran-producer-group
+        #????topic:tag?
+        #topic
+        topic: anran-topic
+        #sync tag(????tag)
+        sync-tag: anran-sync-tags
+        #async tag(????tag)
+        async-tag: anran-async-tags
+        #oneway tag(????tag)
+        oneway-tag: anran-oneway-tags

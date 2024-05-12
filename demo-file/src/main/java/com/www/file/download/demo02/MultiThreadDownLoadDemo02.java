@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MultiThreadDownLoadDemo02 {
 
 
-    private static final long blockSize = 1024*1024*2;
+    private static final long blockSize = 1024 * 1024 * 5;
 
     private final URI uri;
 
