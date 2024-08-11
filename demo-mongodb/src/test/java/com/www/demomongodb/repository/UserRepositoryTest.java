@@ -45,7 +45,7 @@ public class UserRepositoryTest extends DemoMongodbApplicationTests {
 
 	@Test
 	void save() {
-		Users users = Users.builder().age(23).name("tommy").status("processed").id("5").build();
+		Users users = Users.builder().age(23L).name("tommy").status("processed").id("5").build();
 		mongoTemplate.save(users);
 	}
 
@@ -53,7 +53,7 @@ public class UserRepositoryTest extends DemoMongodbApplicationTests {
 	void batchSave() {
 		List<Users> users = new ArrayList<>();
 		for (int i = 2; i < 5; i++) {
-			Users user = Users.builder().age(18).name("tommy").status("processed").id("" + i).build();
+			Users user = Users.builder().age(18L).name("tommy").status("processed").id("" + i).build();
 			users.add(user);
 		}
 		mongoTemplate.insertAll(users);
@@ -64,7 +64,7 @@ public class UserRepositoryTest extends DemoMongodbApplicationTests {
 		Optional<Users> usersOptional = userRepository.findById("1");
 		usersOptional.ifPresent(user -> {
 			user.setName("update");
-			user.setAge(20);
+			user.setAge(20L);
 			mongoTemplate.save(user);
 		});
 	}
@@ -77,7 +77,7 @@ public class UserRepositoryTest extends DemoMongodbApplicationTests {
 		update.inc("age", 1L);
 		mongoTemplate.updateFirst(query, update, "users");
 
-		userRepository.findById("1").ifPresent(user -> log.info("【age】= {}", user.getAge()));
+		userRepository.findById("1").ifPresent(user -> log.info("【age】= {}", user.getName()));
 	}
 
 	@Test

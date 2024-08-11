@@ -1,13 +1,13 @@
-package com.www.rocketmq;
+package com.www.democonsumer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RocketmqApplicationTests {
+class DemoConsumerApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }

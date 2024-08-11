@@ -14,7 +14,7 @@ public class ReadConverter implements Converter<Document, Users> {
 	public Users convert(Document source) {
 		Users user = new Users();
 		user.setName(source.get("name")+"a");
-		user.setAge((Integer) source.get("age"));
+		user.setAge((Long) source.get("age"));
 		return user;
 	}
 }

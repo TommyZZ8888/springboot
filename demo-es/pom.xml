@@ -5,42 +5,50 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.6</version>
-        <relativePath/>
+        <version>3.3.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-    <groupId>com.www</groupId>
-    <artifactId>demo-mq-rocketmq</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>demo-es</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
-    <name>demo-mq-rocketmq</name>
-    <description>demo-mq-rocketmq</description>
-    <packaging>pom</packaging>
-
+    <name>demo-es</name>
+    <description>demo-es</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
-
-    <modules>
-        <module>demo-consumer</module>
-        <module>demo-producer</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-spring-boot-starter</artifactId>
-            <version>2.1.0</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

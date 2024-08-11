@@ -21,7 +21,7 @@ public class Users {
 
     private String name;
 
-    private Integer age;
+    private Long age;
 
     private String status;
 }

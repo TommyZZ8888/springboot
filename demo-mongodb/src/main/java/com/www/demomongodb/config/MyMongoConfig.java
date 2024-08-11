@@ -2,6 +2,7 @@ package com.www.demomongodb.config;
 
 import com.www.demomongodb.convert.ReadConverter;
 import com.www.demomongodb.convert.WriteConverter;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
@@ -10,7 +11,8 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
  * @Author: 张卫刚
  * @Date: 2024/8/4 20:53
  */
-class MyMongoConfig extends AbstractMongoClientConfiguration {
+@Configuration
+public class MyMongoConfig extends AbstractMongoClientConfiguration {
 
 	@Override
 	public String getDatabaseName() {
