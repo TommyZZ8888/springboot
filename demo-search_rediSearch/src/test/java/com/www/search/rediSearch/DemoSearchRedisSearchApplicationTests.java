@@ -1,10 +1,10 @@
-package org.springframework.boot.demoes;
+package com.www.search.rediSearch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoEsApplicationTests {
+class DemoSearchRedisSearchApplicationTests {
 
 	@Test
 	void contextLoads() {
