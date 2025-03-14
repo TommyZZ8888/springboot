@@ -1,5 +1,7 @@
-package com.www.task.quartz.test;
+package com.www.task.quartz;
 
+import com.www.task.quartz.test.BadCatchJob;
+import com.www.task.quartz.test.BadJob;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.quartz.*;
