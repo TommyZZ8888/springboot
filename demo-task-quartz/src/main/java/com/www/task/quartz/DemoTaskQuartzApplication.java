@@ -1,12 +1,12 @@
 package com.www.task.quartz;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
-import tk.mybatis.spring.annotation.MapperScan;
 
-@MapperScan("com.www.task.quartz.mapper")
+@MapperScan("com.www.task.quartz.mapper") // 指定 Mapper 包路径
 @SpringBootApplication
 public class DemoTaskQuartzApplication {
 

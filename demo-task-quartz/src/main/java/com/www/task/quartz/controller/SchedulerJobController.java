@@ -2,7 +2,7 @@ package com.www.task.quartz.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.www.task.quartz.entity.SchedulerJob;
-import com.www.task.quartz.service.SchedulerJobService;
+import com.www.task.quartz.service.SchedulerJobServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class SchedulerJobController {
 	 * 定时任务  service
 	 */
 	@Autowired
-	private SchedulerJobService service;
+	private SchedulerJobServiceImpl service;
 
 	/**
 	 * 列表

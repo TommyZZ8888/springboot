@@ -2,13 +2,13 @@ package com.www.task.quartz.config;
 
 import org.quartz.spi.JobFactory;
 import org.quartz.spi.TriggerFiredBundle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -25,8 +25,8 @@ import java.util.Properties;
 @Configuration
 public class QuartzConfig {
 
-	private static final String QUARTZ_PROPERTIES_PATH = "quartz.properties";
-
+	@Autowired
+	private SpringQuartzProperties quartzProperties;
 
 	@Bean
 	public JobFactory getJobFactory(ApplicationContext applicationContext) {
@@ -41,6 +41,8 @@ public class QuartzConfig {
 		factoryBean.setAutoStartup(true);
 		factoryBean.setJobFactory(jobFactory);
 		factoryBean.setQuartzProperties(quartzProperties());
+		factoryBean.setWaitForJobsToCompleteOnShutdown(quartzProperties.isWaitForJobsToCompleteOnShutdown());
+		factoryBean.setSchedulerName(quartzProperties.getSchedulerName());
 
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setTransactionManager(transactionManager);
@@ -50,7 +52,7 @@ public class QuartzConfig {
 	@Bean
 	public Properties quartzProperties() throws IOException {
 		PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-		propertiesFactoryBean.setLocation(new ClassPathResource(QUARTZ_PROPERTIES_PATH));
+		propertiesFactoryBean.setProperties(quartzProperties.getProperties());
 		propertiesFactoryBean.afterPropertiesSet();
 		return propertiesFactoryBean.getObject();
 	}
@@ -72,6 +74,4 @@ public class QuartzConfig {
 			return job;
 		}
 	}
-
-
 }

@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.www.task.quartz.entity.SchedulerJob;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.github.yulichang.base.MPJBaseMapper;
 
 
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
  * @Author: 张卫刚
  * @Date: 2025/3/18 10:26
  */
-@Mapper
 public interface SchedulerJobMapper extends BaseMapper<SchedulerJob> {
     /**
      * 获取列表数据

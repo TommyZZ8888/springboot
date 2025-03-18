@@ -21,15 +21,10 @@ import java.util.List;
 @Service
 public class JobServiceImpl implements JobService {
 
-    private final JobMapper jobMapper;
-
-    private final Scheduler scheduler;
 
     @Autowired
-    public JobServiceImpl(JobMapper jobMapper, Scheduler scheduler) {
-        this.jobMapper = jobMapper;
-        this.scheduler = scheduler;
-    }
+    private  Scheduler scheduler;
+
 
     @Override
     public void addJob(JobForm form) throws Exception {

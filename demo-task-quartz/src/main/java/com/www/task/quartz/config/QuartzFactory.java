@@ -7,7 +7,7 @@ import com.www.task.quartz.common.SchedulerConst;
 import com.www.task.quartz.entity.SchedulerJob;
 import com.www.task.quartz.entity.SchedulerJobLog;
 import com.www.task.quartz.service.SchedulerJobLogService;
-import com.www.task.quartz.service.SchedulerJobService;
+import com.www.task.quartz.service.SchedulerJobServiceImpl;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -48,7 +48,7 @@ public class QuartzFactory implements Job {
 
 
 	private void updateLastRunDate(String id) {
-		SchedulerJobService schedulerJobService = SpringContextUtil.getBean("schedulerJobService");
+		SchedulerJobServiceImpl schedulerJobService = SpringContextUtil.getBean("schedulerJobService");
 		schedulerJobService.updateLastRunDate(id);
 	}
 
