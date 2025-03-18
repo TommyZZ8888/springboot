@@ -1,7 +1,6 @@
 package com.www.task.quartz.service;
 
 
-import com.github.pagehelper.PageInfo;
 import com.www.task.quartz.entity.domain.JobAndTrigger;
 import com.www.task.quartz.entity.form.JobForm;
 import org.quartz.SchedulerException;
@@ -59,5 +58,5 @@ public interface JobService {
      * @param pageSize    每页条数
      * @return 定时任务列表
      */
-    PageInfo<JobAndTrigger> list(Integer currentPage, Integer pageSize);
+//    PageInfo<JobAndTrigger> list(Integer currentPage, Integer pageSize);
 }

@@ -1,8 +1,12 @@
 package com.www.task.quartz;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.www.task.quartz.mapper.SchedulerJobMapper;
+import com.www.task.quartz.entity.SchedulerJob;
 import org.junit.jupiter.api.Test;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
@@ -24,12 +28,20 @@ public class TestAny {
         CronExpression.validateExpression("0 0 10am 1,15 * ?");
     }
 
+    @Autowired
+    private SchedulerJobMapper schedulerJobMapper;
 
     @Test
     public void test() {
         LocalDateTime dateTime = LocalDateTime.now().plus(30, ChronoUnit.DAYS);
         System.out.println(StringUtils.capitalize("aaa"));
         System.out.println(StringUtils.uncapitalize("Hello"));
+
+
+        QueryWrapper<SchedulerJob> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("code", "1");
+        Long l = schedulerJobMapper.selectCount(queryWrapper);
+        System.out.println(l);
     }
 
 

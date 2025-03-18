@@ -16,4 +16,26 @@ public class SpringContextUtil implements ApplicationContextAware {
 
         this.applicationContext = applicationContext;
     }
+
+    public static <T> T getBean(String beanName) {
+        checkApplicationContext();
+        return (T) applicationContext.getBean(beanName);
+    }
+
+    /**
+     * 通过Class获取Bean
+     *
+     * @param requiredType class eg: Sample.class
+     * @return bean
+     */
+    public static <T> T getBean(Class<T> requiredType) {
+        checkApplicationContext();
+        return applicationContext.getBean(requiredType);
+    }
+
+    private static void checkApplicationContext() {
+        if (applicationContext == null) {
+            throw new RuntimeException("applicationContext is null");
+        }
+    }
 }

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时任务管理</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .page-container {
+          padding: 20px;
+        }
+        .toolbar {
+          margin-bottom: 20px;
+        }
+        .toolbar .el-button {
+          margin-right: 10px;
+        }
+        .table-action {
+          display: flex;
+          gap: 8px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="page-container">
+        <!-- 工具栏 -->
+        <div class="toolbar">
+            <el-button type="primary" @click="handleCreate">
+                <el-icon><Plus /></el-icon>新增
+            </el-button>
+            <el-button type="danger" @click="handleBatchRemove" :disabled="!selectedRows.length">
+                <el-icon><Delete /></el-icon>批量删除
+            </el-button>
+            <el-button type="warning" @click="handleStartAll">
+                <el-icon><VideoPlay /></el-icon>全部开始
+            </el-button>
+            <el-button type="info" @click="handlePauseAll">
+                <el-icon><VideoPause /></el-icon>全部暂停
+            </el-button>
+        </div>
+
+        <!-- 表格 -->
+        <el-table
+                :data="tableData"
+                @selection-change="handleSelectionChange"
+                style="width: 100%"
+        >
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="name" label="任务名称"></el-table-column>
+            <el-table-column prop="cron" label="执行表达式"></el-table-column>
+            <el-table-column prop="code" label="代码"></el-table-column>
+            <el-table-column prop="status" label="状态">
+                <el-table-column prop="bean" label="类"></el-table-column>
+                <el-table-column prop="method" label="方法"></el-table-column>
+                <el-table-column prop="lastRunDate" label="上次执行时间"></el-table-column>
+                <template #default="{row}">
+                    <el-tag :type="row.status === 1 ? 'success' : 'danger'">
+                        {{ row.status === 1 ? '运行中' : '已停止' }}
+                    </el-tag>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" width="280">
+                <template #default="{row}">
+                    <div class="table-action">
+                        <el-button type="primary" size="small" @click="handleEdit(row)">
+                            <el-icon><Edit /></el-icon>编辑
+                        </el-button>
+                        <el-button type="danger" size="small" @click="handleRemove(row)">
+                            <el-icon><Delete></Delete></el-icon>删除
+                        </el-button>
+                        <el-dropdown>
+                            <el-button size="small">
+                                更多<el-icon class="el-icon--right"><ArrowDown /></el-icon>
+                            </el-button>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item @click="handleExecute(row)">
+                                        <el-icon><VideoPlay></VideoPlay></el-icon>立即执行
+                                    </el-dropdown-item>
+                                    <el-dropdown-item @click="handleViewLog(row)">
+                                        <el-icon><Document /></el-icon>执行日志
+                                    </el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                </template>
+            </el-table-column>
+        </el-table>
+
+        <!-- 表单弹窗 -->
+        <el-dialog
+                v-model="dialogVisible"
+                :title="formData.id ? '编辑任务' : '新增任务'"
+                width="500px"
+        >
+            <el-form :model="formData" label-width="100px">
+                <el-form-item label="任务名称">
+                    <el-input v-model="formData.name"></el-input>
+                </el-form-item>
+                <el-form-item label="code">
+                    <el-input v-model="formData.code"></el-input>
+                </el-form-item>
+                <el-form-item label="cron">
+                    <el-input v-model="formData.cron"></el-input>
+                </el-form-item>
+                <el-form-item label="bean">
+                    <el-input v-model="formData.bean"></el-input>
+                </el-form-item>
+                <el-form-item label="method">
+                    <el-input v-model="formData.method"></el-input>
+                </el-form-item>
+                <el-form-item label="status">
+                    <el-input v-model="formData.status"></el-input>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <el-button @click="dialogVisible = false">取消</el-button>
+                <el-button type="primary" @click="handleSave">确定</el-button>
+            </template>
+        </el-dialog>
+
+        <!-- 日志弹窗 -->
+        <el-dialog
+                v-model="logDialogVisible"
+                title="执行日志"
+                width="800px"
+        >
+            <el-table :data="logData">
+                <el-table-column prop="createTime" label="执行时间" width="180"></el-table-column>
+                <el-table-column prop="status" label="状态">
+                    <template #default="{row}">
+                        <el-tag :type="row.status === 1 ? 'success' : 'danger'">
+                            {{ row.status === 1 ? '成功' : '失败' }}
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="message" label="日志信息"></el-table-column>
+            </el-table>
+        </el-dialog>
+    </div>
+</div>
+
+<script>
+    const { createApp, ref, onMounted } = Vue;
+
+    createApp({
+      setup() {
+        // 表格数据
+        const tableData = ref([]);
+
+        // 日志数据
+        const logData = ref([]);
+
+        // 选中的行
+        const selectedRows = ref([]);
+
+        // 表单弹窗
+        const dialogVisible = ref(false);
+        const formData = ref({
+          id: '',
+          name: '',
+          code: '',
+          cron: '',
+          bean: '',
+          method: '',
+          status: '',
+          remarks: '',
+          sys: '',
+          lastRunDate: '',
+          version: '',
+          createUser: '',
+          createDate: '',
+          editUser: '',
+          editDate: ''
+        });
+
+        // 日志弹窗
+        const logDialogVisible = ref(false);
+
+        // 加载数据
+        const loadData = async () => {
+          try {
+            const response = await axios.get('http://localhost:8080/demo/api/scheduler/job');
+            tableData.value = response.data.content; // 假设返回的数据格式为 { content: [...] }
+          } catch (error) {
+            ElMessage.error('数据加载失败');
+          }
+        };
+
+        // 表格选择变化
+        const handleSelectionChange = (rows) => {
+          selectedRows.value = rows;
+        };
+
+        // 新增
+        const handleCreate = () => {
+          formData.value = {
+            id: '',
+            name: '',
+            code: '',
+            cron: '',
+            bean: '',
+            method: '',
+            status: '',
+            remarks: '',
+            sys: '',
+            lastRunDate: '',
+            version: '',
+            createUser: '',
+            createDate: '',
+            editUser: '',
+            editDate: ''
+          };
+          dialogVisible.value = true;
+        };
+
+        // 编辑
+        const handleEdit = (row) => {
+          formData.value = { ...row };
+          dialogVisible.value = true;
+        };
+
+        // 保存
+        const handleSave = async () => {
+          try {
+            if (formData.value.id) {
+              await axios.put(`http://localhost:8080/demo/api/scheduler/job/${formData.value.id}`, formData.value);
+            } else {
+              await axios.post('http://localhost:8080/demo/api/scheduler/job', formData.value);
+            }
+            ElMessage.success('保存成功');
+            dialogVisible.value = false;
+            loadData(); // 重新加载数据
+          } catch (error) {
+            ElMessage.error('保存失败');
+          }
+        };
+
+        // 删除
+        const handleRemove = async (row) => {
+          try {
+            await ElMessageBox.confirm('确认删除该任务吗？');
+            await axios.delete(`http://localhost:8080/demo/api/scheduler/job/${row.id}`);
+            ElMessage.success('删除成功');
+            loadData(); // 重新加载数据
+          } catch (error) {
+            ElMessage.error('删除失败');
+          }
+        };
+
+        // 批量删除
+        const handleBatchRemove = async () => {
+          try {
+            await ElMessageBox.confirm(`确认删除选中的 ${selectedRows.value.length} 个任务吗？`);
+            const ids = selectedRows.value.map(row => row.id).join(',');
+            await axios.delete(`http://localhost:8080/demo/api/scheduler/job/${ids}`);
+            ElMessage.success('批量删除成功');
+            loadData(); // 重新加载数据
+          } catch (error) {
+            ElMessage.error('批量删除失败');
+          }
+        };
+
+        // 立即执行
+        const handleExecute = async (row) => {
+          try {
+            await axios.post(`http://localhost:8080/demo/api/scheduler/job/immediate/execution/${row.id}`);
+            ElMessage.success('任务已开始执行');
+          } catch (error) {
+            ElMessage.error('任务执行失败');
+          }
+        };
+
+        // 查看日志
+        const handleViewLog = async (row) => {
+          try {
+            const response = await axios.get(`http://localhost:8080/demo/api/scheduler/job/logs/${row.id}`); // 假设有日志接口
+            logData.value = response.data;
+            logDialogVisible.value = true;
+          } catch (error) {
+            ElMessage.error('日志加载失败');
+          }
+        };
+
+        // 全部开始
+        const handleStartAll = async () => {
+          try {
+            await ElMessageBox.confirm('确认要全部开始吗？');
+            await axios.post('http://localhost:8080/demo/api/scheduler/job/start/all');
+            ElMessage.success('已全部开始');
+            loadData(); // 重新加载数据
+          } catch (error) {
+            ElMessage.error('操作失败');
+          }
+        };
+
+        // 全部暂停
+        const handlePauseAll = async () => {
+          try {
+            await ElMessageBox.confirm('确认要全部暂停吗？');
+            await axios.post('http://localhost:8080/demo/api/scheduler/job/pause/all');
+            ElMessage.success('已全部暂停');
+            loadData(); // 重新加载数据
+          } catch (error) {
+            ElMessage.error('操作失败');
+          }
+        };
+
+        // 初始化加载数据
+        onMounted(() => {
+          loadData();
+        });
+
+        return {
+          tableData,
+          logData,
+          selectedRows,
+          dialogVisible,
+          logDialogVisible,
+          formData,
+          handleSelectionChange,
+          handleCreate,
+          handleEdit,
+          handleSave,
+          handleRemove,
+          handleBatchRemove,
+          handleExecute,
+          handleViewLog,
+          handleStartAll,
+          handlePauseAll
+        };
+      }
+    }).use(ElementPlus).mount('#app');
+</script>
+</body>
+</html>

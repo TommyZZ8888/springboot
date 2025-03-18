@@ -1,7 +1,6 @@
 package com.www.task.quartz.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import com.www.task.quartz.entity.domain.JobAndTrigger;
 import com.www.task.quartz.entity.form.JobForm;
 import com.www.task.quartz.mapper.JobMapper;
@@ -89,10 +88,10 @@ public class JobServiceImpl implements JobService {
         }
     }
 
-    @Override
-    public PageInfo<JobAndTrigger> list(Integer currentPage, Integer pageSize) {
-        PageHelper.startPage(currentPage, pageSize);
-        List<JobAndTrigger> list = jobMapper.list();
-        return PageInfo.of(list);
-    }
+//    @Override
+//    public PageInfo<JobAndTrigger> list(Integer currentPage, Integer pageSize) {
+//        PageHelper.startPage(currentPage, pageSize);
+//        List<JobAndTrigger> list = jobMapper.list();
+//        return PageInfo.of(list);
+//    }
 }

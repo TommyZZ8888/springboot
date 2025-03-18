@@ -11,8 +11,8 @@ import java.util.List;
  * @Author 张卫刚
  * @Date Created on 2023/12/19
  */
-@Component
+@Mapper
 public interface JobMapper {
 
-    List<JobAndTrigger> list();
+//    List<JobAndTrigger> list();
 }

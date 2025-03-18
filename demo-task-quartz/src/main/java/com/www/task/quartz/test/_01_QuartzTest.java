@@ -4,11 +4,8 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 
-
-//import static org.quartz.JobBuilder.*;
-//import static org.quartz.TriggerBuilder.*;
-//import static org.quartz.SimpleScheduleBuilder.*;
 public class _01_QuartzTest {
 
     public static void main(String[] args) {
@@ -37,10 +34,8 @@ public class _01_QuartzTest {
             TimeUnit.SECONDS.sleep(20);
             scheduler.shutdown();
 
-        } catch (SchedulerException se) {
+        } catch (SchedulerException | InterruptedException se) {
             se.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }

@@ -3,7 +3,6 @@ package com.www.task.quartz.controller;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.github.pagehelper.PageInfo;
 import com.www.task.quartz.common.ApiResponse;
 import com.www.task.quartz.entity.domain.JobAndTrigger;
 import com.www.task.quartz.entity.form.JobForm;
@@ -99,18 +98,18 @@ public class JobController {
 
         return new ResponseEntity<>(ApiResponse.msg("修改成功"), HttpStatus.OK);
     }
-
-    @GetMapping
-    public ResponseEntity<ApiResponse> jobList(Integer currentPage, Integer pageSize) {
-        if (ObjectUtil.isNull(currentPage)) {
-            currentPage = 1;
-        }
-        if (ObjectUtil.isNull(pageSize)) {
-            pageSize = 10;
-        }
-        PageInfo<JobAndTrigger> all = jobService.list(currentPage, pageSize);
-        return ResponseEntity.ok(ApiResponse.ok(Dict.create().set("total", all.getTotal()).set("data", all.getList())));
-    }
+//
+//    @GetMapping
+//    public ResponseEntity<ApiResponse> jobList(Integer currentPage, Integer pageSize) {
+//        if (ObjectUtil.isNull(currentPage)) {
+//            currentPage = 1;
+//        }
+//        if (ObjectUtil.isNull(pageSize)) {
+//            pageSize = 10;
+//        }
+//        PageInfo<JobAndTrigger> all = jobService.list(currentPage, pageSize);
+//        return ResponseEntity.ok(ApiResponse.ok(Dict.create().set("total", all.getTotal()).set("data", all.getList())));
+//    }
 
 
 }

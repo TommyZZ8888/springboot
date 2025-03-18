@@ -38,19 +38,21 @@ logging:
 mybatis:
     configuration:
       map-underscore-to-camel-case: true
-    mapper-locations: classpath:mappers/*.xml
+    mapper-locations: classpath:mapper/*.xml
     type-aliases-package: com.www.task.quartz.entity
-mapper:
-    mappers:
-        - tk.mybatis.mapper.common.Mapper
-    not-empty: true
-    style: camelhump
-    wrap-keyword: "`{0}`"
-    safe-delete: true
-    safe-update: true
-    identity: MYSQL
-pagehelper:
-    auto-dialect: true
-    helper-dialect: mysql
-    reasonable: true
-    params: count=countSql
+    
+#    type-aliases-package: com.www.task.quartz.entity
+#mapper:
+#    mappers:
+#        - tk.mybatis.mapper.common.Mapper
+#    not-empty: true
+#    style: camelhump
+#    wrap-keyword: "`{0}`"
+#    safe-delete: true
+#    safe-update: true
+#    identity: MYSQL
+#pagehelper:
+#    auto-dialect: true
+#    helper-dialect: mysql
+#    reasonable: true
+#    params: count=countSql
