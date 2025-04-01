@@ -28,7 +28,6 @@ class DemoTaskQuartzApplicationTests {
 
 
 
-        schedulerJobService.selectAll();
         System.out.println();
     }
 }
