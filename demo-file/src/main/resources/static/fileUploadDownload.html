@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大文件上传下载</title>
+    <style>
+        #upload-container {
+            width: 300px;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            margin-top: 10px;
+            height: 20px;
+            background: #f5f5f5;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        #upload-list {
+            margin-top: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="upload-container">
+    <p>点击"选择文件"按钮或拖放文件到此处</p>
+    <input type="file" id="fileInput" multiple style="display: none;" />
+</div>
+
+<button id="picker">选择文件</button>
+<button id="uploadBtn" disabled>开始上传</button>
+
+<div id="upload-list"></div>
+
+<hr/>
+<button id="normal-download">普通下载</button>
+<hr/>
+<button id="chunk-download">分片下载</button>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const BASE_URL = 'http://localhost:8080'; // 明确指定8080端口
+    const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB分片大小
+    let fileList = [];
+
+    // 选择文件按钮
+    document.getElementById('picker').addEventListener('click', () => {
+        document.getElementById('fileInput').click();
+    });
+
+    // 拖放功能
+    const uploadContainer = document.getElementById('upload-container');
+    uploadContainer.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadContainer.style.borderColor = '#4CAF50';
+    });
+
+    uploadContainer.addEventListener('dragleave', () => {
+        uploadContainer.style.borderColor = '#ccc';
+    });
+
+    uploadContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadContainer.style.borderColor = '#ccc';
+        handleFiles(e.dataTransfer.files);
+    });
+
+    // 文件选择处理
+    document.getElementById('fileInput').addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        fileList = Array.from(files);
+        const list = document.getElementById('upload-list');
+        list.innerHTML = '';
+
+        fileList.forEach((file, idx) => {
+            const div = document.createElement('div');
+            div.className = 'file-item';
+            div.id = `file-${idx}`;
+            div.innerHTML = `
+                <p>${file.name} (${formatFileSize(file.size)})</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar-${idx}"></div>
+                </div>
+                <p class="status" id="status-${idx}">等待上传</p>
+            `;
+            list.appendChild(div);
+        });
+
+        document.getElementById('uploadBtn').disabled = fileList.length === 0;
+    }
+
+    // 开始上传
+    document.getElementById('uploadBtn').addEventListener('click', async () => {
+        document.getElementById('uploadBtn').disabled = true;
+
+        for (let i = 0; i < fileList.length; i++) {
+            await uploadFile(fileList[i], i);
+        }
+    });
+
+    // 文件上传函数
+    async function uploadFile(file, fileIndex) {
+        const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+        const fileId = `${file.name}-${file.size}-${file.lastModified}`;
+
+        updateStatus(fileIndex, '准备上传...');
+
+        for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+            const start = chunkIndex * CHUNK_SIZE;
+            const end = Math.min(file.size, start + CHUNK_SIZE);
+            const chunk = file.slice(start, end);
+
+            const formData = new FormData();
+            formData.append('file', chunk);
+            formData.append('fileName', file.name);
+            formData.append('fileSize', file.size);
+            formData.append('totalChunks', totalChunks);
+            formData.append('chunkIndex', chunkIndex);
+            formData.append('fileId', fileId);
+
+            try {
+                updateStatus(fileIndex, `上传中 (${chunkIndex + 1}/${totalChunks})`);
+
+                await axios.post(`${BASE_URL}/file/upload`, formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    onUploadProgress: (progressEvent) => {
+                        if (progressEvent.lengthComputable) {
+                            const percent = Math.round(
+                                ((chunkIndex + progressEvent.loaded / progressEvent.total) / totalChunks) * 100
+                            );
+                            updateProgress(fileIndex, percent);
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error(`上传失败: ${error}`);
+                updateStatus(fileIndex, `上传失败: ${error.message}`);
+                document.getElementById(`progress-bar-${fileIndex}`).style.backgroundColor = '#f44336';
+                throw error; // 终止上传
+            }
+        }
+
+        updateStatus(fileIndex, '上传完成');
+        document.getElementById(`progress-bar-${fileIndex}`).style.backgroundColor = '#4CAF50';
+    }
+
+    // 更新进度条
+    function updateProgress(fileIndex, percent) {
+        document.getElementById(`progress-bar-${fileIndex}`).style.width = `${percent}%`;
+    }
+
+    // 更新状态
+    function updateStatus(fileIndex, message) {
+        document.getElementById(`status-${fileIndex}`).textContent = message;
+    }
+
+    // 格式化文件大小
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // 下载按钮事件
+    document.getElementById('normal-download').addEventListener('click', () => {
+        window.open(`${BASE_URL}/file/download`, '_blank');
+    });
+
+    document.getElementById('chunk-download').addEventListener('click', () => {
+        window.open(`${BASE_URL}/file/downloads`, '_blank');
+    });
+</script>
+</body>
+</html>

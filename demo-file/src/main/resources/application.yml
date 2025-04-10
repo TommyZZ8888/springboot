@@ -4,4 +4,18 @@ spring:
     thymeleaf:
         prefix: classpath:/static/
         suffix: .html
-        cache: false #????
+        cache: false
+    datasource:
+        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    servlet:
+        multipart:
+            # Spring Boot中有默认的文件上传组件，在使用ServletFileUpload时需要关闭Spring Boot的默认配置
+            enabled: true
+            # 设置单个文件大小
+            max-file-size: 1GB
+            # 设置单次请求文件的总大小
+            max-request-size: 10GB
+        

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大文件上传下载</title>
+    <link rel="stylesheet" type="text/css" href="webuploader.css">
+    <script src="jquery.js"></script>
+    <script src="webuploader.js"></script>
+    <style>
+        #upload-container {
+            width: 100px;
+            height: 50px;
+            background: #94d3e7;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="upload-container"><span>文件拖拽上传</span></div>
+
+<button id="picker" style="margin-top: 20px">分片上传</button>
+
+<div id="upload-list"></div>
+
+<hr/>
+<a href="/file/download" >普通下载</a>
+<hr/>
+<a href="/file/downloads" target="_blank">分片下载</a>
+
+</body>
+<script>
+    $('#upload-container').click(function (event) {
+        $("#picker").find('input').click();
+    });
+    // 初始化上传组件
+    const uploader = WebUploader.create({
+        auto: true,
+        swf: 'Uploader.swf', // swf文件路径
+        server: '/file/upload', // 上传接口
+        dnd: '#upload-container',
+        pick: '#picker',  // 内部根据当前运行创建
+        multiple: true,     // 选择多个
+        chunked: true,      // 开启分片
+        threads: 8,        // 并发数，默认 3
+        chunkRetry: 8,         // 如果遇到网络错误,重新上传次数
+        method: 'POST',
+        fileSizeLimit: 1024 * 1024 * 1024 * 10, // 文件总大小为10G
+        fileSingleSizeLimit: 1024 * 1024 * 1024 * 1,  // 单个文件大小最大为1G
+        fileVal: 'upload'
+    });
+    // 入队之前触发事件
+    uploader.on("beforeFileQueued", function (file) {
+        // 获取文件后缀
+        console.log(file.name);
+    });
+    // 当有文件被添加进队列的时候
+    uploader.on('fileQueued', function (file) {
+        $('#upload-list').append( '<div id="' + file.id + '" class="item">' +
+            '<h4 class="info">' + file.name + '</h4>' +
+            '<p class="state">等待上传...</p>' +
+            '</div>' );
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function (file, percentage) {
+        var $li = $('#' + file.id),
+            $percent = $li.find('.progress .progress-bar');
+        // 避免重复创建
+        if (!$percent.length) {
+            $percent = $('<div class="progress progress-striped active">' +
+                '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                '</div>' +
+                '</div>').appendTo($li).find('.progress-bar');
+        }
+        $li.find('p.state').text('上传中');
+        $percent.css('width', percentage * 100 + '%');
+    });
+    uploader.on( 'uploadSuccess', function( file ) {
+        $( '#'+file.id ).find('p.state').text('已上传');
+    });
+
+    uploader.on( 'uploadError', function( file ) {
+        $( '#'+file.id ).find('p.state').text('上传出错');
+    });
+
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').fadeOut();
+    });
+
+</script>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载</title>
+    <script src="jquery-3.5.1.js"></script>
+    <!-- Same styles as before -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+            background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        }
+
+        .login-wrapper {
+            background-color: #fff;
+            width: 358px;
+            height: 588px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .input-item {
+            display: flex;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-item:placeholder {
+            text-transform: uppercase;
+        }
+
+        .button {
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+            background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+            color: #fff;
+            border: 2px solid white;
+            border-radius: 15px;
+        }
+
+        a {
+            text-decoration-line: none;
+            color: #abc1ee;
+        }
+
+        button {
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+<!--            background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);-->
+            color: #fff;
+            border: 2px solid white;
+            border-radius: 15px;
+        }
+
+        button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 鼠标悬停时增加阴影 */
+    transform: scale(1.02); /* 按钮稍微放大 */
+}
+
+button:active {
+    transform: scale(0.98); /* 点击时按钮缩小 */
+    box-shadow: none; /* 移除阴影以模拟按下的效果 */
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="login-wrapper">
+        <div class="header"></div></br>
+        <div class="form-wrapper">
+            <input type="text" id="serverPath" name="serverPath" placeholder="下载地址" class="input-item">
+            <input type="text" id="localPath" name="localPath" placeholder="本地地址" class="input-item">
+            <button id="startButton" type="button" style="margin-top: 20px;">下载</button>
+            <button id="pauseButton" type="button" style="margin-top: 10px;">暂停</button>
+            <button id="resumeButton" type="button" style="margin-top: 10px;">继续</button>
+            <button id="cancelButton" type="button" style="margin-top: 10px;">取消</button>
+            <button id="restartButton" type="button" style="margin-top: 10px;">重新下载</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentDownloadId = null;
+
+    function sendRequest(url, data, successMessage) {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/' + url,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            data: data,
+            dataType: 'JSON',
+            success: function (data) {
+                alert(data.data);
+                if (data.result === "0" && url === 'download') {
+                    currentDownloadId = data.downloadId;
+                }
+            }
+        });
+    }
+
+    $("#startButton").click(function() {
+        let serverPath = $("#serverPath").val();
+        let localPath = $("#localPath").val();
+        sendRequest('start', {serverPath: serverPath, localPath: localPath});
+    });
+
+    $("#pauseButton").click(function() {
+<!--        if (currentDownloadId) {-->
+            sendRequest('pause', {downloadId: currentDownloadId});
+<!--        }-->
+    });
+
+    $("#resumeButton").click(function() {
+<!--        if (currentDownloadId) {-->
+            sendRequest('resume', {downloadId: currentDownloadId});
+<!--        }-->
+    });
+
+    $("#cancelButton").click(function() {
+<!--        if (currentDownloadId) {-->
+            sendRequest('cancel', {downloadId: currentDownloadId});
+            currentDownloadId = null;
+<!--        }-->
+    });
+
+    $("#restartButton").click(function() {
+<!--        if (currentDownloadId) {-->
+            sendRequest('restart', {downloadId: currentDownloadId});
+<!--        }-->
+    });
+</script>
+</body>
+</html>
