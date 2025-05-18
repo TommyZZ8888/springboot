@@ -47,7 +47,7 @@
         <module>demo-swagger</module>
         <module>demo-rbac-security</module>
         <module>demo-mongodb</module>
-        <module>demo-search_rediSearch</module>
+        <module>demo-search-rediSearch</module>
     </modules>
 
     <properties>
