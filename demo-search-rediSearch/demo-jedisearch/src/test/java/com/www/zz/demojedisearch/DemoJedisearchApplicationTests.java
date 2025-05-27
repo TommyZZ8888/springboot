@@ -2,12 +2,10 @@ package com.www.zz.demojedisearch;
 
 import com.www.zz.demojedisearch.model.TestUser;
 import com.www.zz.demojedisearch.utils.MyBeanUtil;
-import io.redisearch.Document;
 import io.redisearch.Query;
 import io.redisearch.SearchResult;
 import io.redisearch.client.Client;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @SpringBootTest
 class DemoJedisearchApplicationTests {
@@ -114,6 +111,15 @@ class DemoJedisearchApplicationTests {
 		query3.setLanguage(language);
 		SearchResult searchResult3 = client.search(query3);
 		printResult(searchResult3);
+	}
+
+	@Test
+	void testSearchFenCi3() {
+		String queryKey = String.format("@name:(%s)", "上,海,第,六");
+		Query query = new Query(queryKey);
+		query.setLanguage(language);
+		SearchResult searchResult = client.search(query);
+		printResult(searchResult);
 	}
 
 

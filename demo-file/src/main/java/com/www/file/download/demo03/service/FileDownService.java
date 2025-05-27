@@ -19,7 +19,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.www.file.download.demo03.bo.BlockInfo;
 import com.www.file.download.demo03.bo.DownFileBO;
 import com.www.file.download.demo03.thread.BlockFileDownCallable;
@@ -191,7 +192,7 @@ public class FileDownService {
 
   private void saveTempFile(RandomAccessFile tempRandomAccessFile, DownFileBO downFileBO)
       throws IOException {
-    var jsonString = JSON.toJSONString(downFileBO);
+    var jsonString = JSONUtil.toJsonStr(downFileBO);
     var length = jsonString.length();
     var tempStr = length + TEMP_LEN_FLAG + jsonString;
     tempRandomAccessFile.seek(0);
@@ -236,7 +237,7 @@ public class FileDownService {
     var length = Integer.parseInt(lengthStr);
     var flagLength = lengthStr.length() + TEMP_LEN_FLAG.length();
     var jsonStr = tempStr.substring(flagLength, flagLength + length);
-    return JSON.parseObject(jsonStr, DownFileBO.class);
+    return JSONUtil.toBean(jsonStr, DownFileBO.class);
   }
 
   private Future<Boolean> submit(String filePath, File target, BlockInfo blockInfo) {

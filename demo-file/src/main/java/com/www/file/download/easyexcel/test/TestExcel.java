@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@TableName("test_excel")
+//@TableName("test_excel")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

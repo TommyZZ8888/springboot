@@ -10,7 +10,7 @@ import com.alibaba.excel.write.handler.WriteHandler;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.fill.FillConfig;
 
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
@@ -26,33 +26,33 @@ public class ExcelExportService {
 
     private String fileName;
 
-    private HttpServletResponse response;
+//    private HttpServletResponse response;
 
     private ExcelWriter excelWriter;
 
     private FillConfig fillConfig;
 
-    public ExcelExportService(String fileName, HttpServletResponse response, WriteHandler... writeHandlers) {
-        this(fileName, response, null, writeHandlers);
-    }
+//    public ExcelExportService(String fileName, HttpServletResponse response, WriteHandler... writeHandlers) {
+//        this(fileName, response, null, writeHandlers);
+//    }
 
-    public ExcelExportService(String fileName, HttpServletResponse response, InputStream templateInputStream, WriteHandler... writeHandlers) {
-        this.fileName = fileName;
-        this.response = response;
-        this.fillConfig = FillConfig.builder().forceNewRow(Boolean.TRUE).build();
-        try {
-            ExcelWriterBuilder write = EasyExcel.write(response.getOutputStream());
-            if (templateInputStream != null) {
-                write.withTemplate(templateInputStream);
-            }
-            for (WriteHandler writeHandler : writeHandlers) {
-                write.registerWriteHandler(writeHandler);
-            }
-            this.excelWriter = write.build();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public ExcelExportService(String fileName, HttpServletResponse response, InputStream templateInputStream, WriteHandler... writeHandlers) {
+//        this.fileName = fileName;
+//        this.response = response;
+//        this.fillConfig = FillConfig.builder().forceNewRow(Boolean.TRUE).build();
+//        try {
+//            ExcelWriterBuilder write = EasyExcel.write(response.getOutputStream());
+//            if (templateInputStream != null) {
+//                write.withTemplate(templateInputStream);
+//            }
+//            for (WriteHandler writeHandler : writeHandlers) {
+//                write.registerWriteHandler(writeHandler);
+//            }
+//            this.excelWriter = write.build();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public ExcelExportService write(Collection<?> data, String sheetName, Class head) {
         WriteSheet writeSheet = getWriteSheet(sheetName, head, null);
@@ -86,12 +86,12 @@ public class ExcelExportService {
         return this;
     }
 
-    public void export() {
-        response.setContentType("application/vnd.ms-excel");
-        response.setCharacterEncoding("utf-8");
-        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ExcelTypeEnum.XLSX.getValue());
-        excelWriter.finish();
-    }
+//    public void export() {
+//        response.setContentType("application/vnd.ms-excel");
+//        response.setCharacterEncoding("utf-8");
+//        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+//        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ExcelTypeEnum.XLSX.getValue());
+//        excelWriter.finish();
+//    }
 
 }

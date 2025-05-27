@@ -151,6 +151,21 @@ class DemoJedisApplicationTests {
 		searchResult3.getDocuments().forEach(System.out::println);
 	}
 
+	@Test
+	void testSearchFenCi3() {
+//				Map<String, String> hash = new HashMap<>();
+//		hash.put("id", "4");
+//		hash.put("name", "上海市第六人民医院");
+//		hash.put("_language", Constants.GOODS_IDX_LANGUAGE);
+//		client.hset(prefix + "4", hash);
+
+		String queryKey = String.format("@name:(%s)", "上海第六");
+		Query query = new Query(queryKey);
+		query.setLanguage(language);
+		SearchResult searchResult3 = client.ftSearch(idxName, query);
+		searchResult3.getDocuments().forEach(System.out::println);
+	}
+
 
 	@Test
 	void testDelDocument() {
@@ -160,5 +175,6 @@ class DemoJedisApplicationTests {
 			System.out.println(hdel);
 		}
 	}
+
 
 }
