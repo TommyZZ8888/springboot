@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <script src="../static/js/jquery.min.js"></script>
+    <th:block th:include="include :: header('视频展示rtsp')"/>
+</head>
+<body class="gray-bg">
+<div style="padding: 20px">
+    <p style="font-size: 20px;color: #0a7491;font-weight: bold;font-family: 楷体">rtsp拉取视频显示 <a href="test">切换到新版页面</a></p>
+    <img id="show_video" src="">
+</div>
+<th:block th:include="include :: footer"/>
+<script src="../static/js/workbench/WebSocket.js" th:src="@{/js/workbench/WebSocket.js}"></script>
+<script th:inline="javascript">
+    // var wsUrl = getWsPath() + "/webSocketService";
+    var wsUrl =  "localhost:8080/webSocketService";
+    //建立连接
+    var ws1 = new Ws({
+        host: ""
+        , port: ""
+        , path: wsUrl
+        , wsMesEvent: function (message) {
+            //将接收到的二进制数据转为字符串
+            var data = JSON.parse(message);
+            if (data.code === 0) {
+                console.log(message)
+            } else if (data.code === 201) {
+                $("#show_video").attr("src", "data:image/*;base64," + data.data)
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

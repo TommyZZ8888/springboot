@@ -48,6 +48,7 @@
         <module>demo-rbac-security</module>
         <module>demo-mongodb</module>
         <module>demo-search-rediSearch</module>
+        <module>demo-cache-caffeine</module>
     </modules>
 
     <properties>

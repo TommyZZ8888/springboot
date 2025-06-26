@@ -1,8 +1,9 @@
 spring:
     cache:
         type: jcache
-        jcache:
-            config: classpath:ehcache.xml
+        caffeine:
+        # 初始化缓存空间容量100，最大缓存容量200个，写入数据5分钟后失效
+            spec: initialCapacity=100,maximumSize=200,expireAfterWrite=5m
 logging:
     level:
         com.www: debug

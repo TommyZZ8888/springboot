@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('视频展示rtsp')"/>
+    <link th:href="@{/css/video/video-js.min.css}" href="../static/css/video/video-js.min.css" rel="stylesheet"/>
+    <style>
+        .search {
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        .mainContainer {
+            display: block;
+            width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .centeredVideo {
+            display: block;
+            width: 100%;
+            height: 576px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+        }
+
+        .controls {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+<div style="padding: 20px">
+    <p style="font-size: 20px;color: #0a7491;font-weight: bold;font-family: 楷体;text-align: center">rtsp拉取视频显示</p>
+    <div style="text-align:center">
+        <div class="search">
+            文件地址（rtsp地址）：<input id="video_path" type="text" style="width: 300px"/>
+            <button type="button" onclick="changePath()">确定</button>
+        </div>
+        <div class="mainContainer">
+            <video id="videoElement" class="centeredVideo" controls autoplay width="1024" height="576">Your browser is
+                too old which doesn't support HTML5 video.
+            </video>
+        </div>
+        <div class="controls">
+            <button onclick="flv_start()">开始</button>
+            <button onclick="flv_pause()">暂停</button>
+            <button onclick="flv_destroy()">停止</button>
+            <input style="width:200px" type="text" name="seekpoint" placeholder="输入时间点，int值，秒单位"/>
+            <button onclick="flv_seekto()">跳转</button>
+        </div>
+    </div>
+
+</div>
+<th:block th:include="include :: footer"/>
+<!--<script th:src="@{/js/video/video.min.js}" src="../static/js/video/video.min.js"></script>-->
+<script th:src="@{/js/video/flv.js}" src="../static/js/video/flv.js"></script>
+<script th:inline="javascript">
+    let videoElement = document.getElementById('videoElement');
+
+    function resetUrl(url) {
+        if (flvjs.isSupported()) {
+            let flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                isLive: true,//<====加个这个
+                url: url,//<==自行修改
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load(); //加载
+            flvPlayer.play()
+            flv_start();
+        }
+    }
+
+    function flv_start() {
+        videoElement.play();
+    }
+
+    function flv_pause() {
+        videoElement.pause();
+    }
+
+    function flv_destroy() {
+        videoElement.pause();
+        videoElement.unload();
+        videoElement.detachMediaElement();
+        videoElement.destroy();
+        videoElement = null;
+    }
+
+    function flv_seekto() {
+        videoElement.currentTime = parseFloat(document.getElementsByName('seekpoint')[0].value);
+    }
+
+    function changePath() {
+        let path = $("#video_path").val();
+        if (path === null || path === "") {
+            alert("请输入地址")
+            return
+        }
+        $.ajax({
+            type: "POST",
+            url: ctx + "putVideo",
+            data: {path: path},
+            success: function (result) {
+                if (result.code === 0) {
+                    resetUrl(ctx + "getVideo?id=" + result.data)
+                }
+            },
+            error: function () {
+                alert("请求出错")
+            }
+        })
+    }
+</script>
+</body>
+</html>
