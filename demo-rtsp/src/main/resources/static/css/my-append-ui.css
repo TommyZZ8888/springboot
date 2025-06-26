@@ -1,0 +1,164 @@
+/*必填信息*样式*/
+.required-content{
+    display: inline-block;
+    color: #ff0000;
+    margin-right: 5px;
+}
+
+/*不同内容统一提示信息样式*/
+.hint-information{
+    display:inline-block;
+    color: #ff7675;
+    margin-top: 5px
+}
+
+.head-hint{
+    display:block;
+    color: #ff7675;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+/*将div状变为input(text)样式*/
+.my-ui-input{
+   cursor: text;
+}
+.input-hint{
+    color: #999999;
+}
+
+
+/*单文件选择框样式*/
+.my-file-img{
+    height: 100px;
+    width: 300px;
+    margin-top: 10px;
+    display: none;
+}
+
+/*图片追加器样式*/
+.my-ui-img-div{
+    display: inline-block;
+    margin-left: 10px;
+    margin-top:5px;
+    border:1px solid #96c2f1;
+    background:#eff7ff;
+    border-radius:5px;
+}
+.my-ui-img-div .my-ui-img-file{
+    display: none;
+}
+.img-circle.my-ui-img{
+    width: 60px;
+    height: 60px;
+}
+
+/*表单验证错误信息样式*/
+label.error{
+    z-index: 3;
+}
+.form-group .error{
+    margin-right: 10px;
+}
+.bootstrap-select .error{
+    margin-right: 20px;
+}
+.radio .error{
+    margin-right: 0px;
+}
+.color-selector .error {
+    margin-right: 65px;
+}
+.file-choice .error{
+    margin-right: 105px;
+}
+.input-word-one .error{
+    margin-right: 25px;
+}
+.input-word-two .error{
+    margin-right: 40px;
+}
+.input-word-three .error{
+    margin-right: 55px;
+}
+.input-word-four .error{
+    margin-right: 70px;
+}
+.input-word-five .error{
+    margin-right: 85px;
+}
+
+/**
+    数据词典中拓展的class类型
+ */
+.badge-expand1{
+    color: white;
+    background:#56a3c1
+}
+.badge-expand2{
+    color: white;background:#0a7491
+}
+.badge-expand3{
+    color: white;background:#27615d
+}
+.badge-expand4{
+    color: white;background:#274361
+}
+.badge-expand5{
+    color: white;background:#686b6d
+}
+.badge-expand6{
+    color: white;background:#9ea6b9
+}
+.badge-expand7{
+    color: #2d586c;background:#00F7DE
+}
+.badge-expand8{
+    color: white;background:#00a65a
+}
+.badge-expand9{
+    color: white;background:#8c8c8c
+}
+.badge-expand10{
+    color: white;background:#605ca8
+}
+.badge-expand11{
+    color: white;background:#96c2f1
+}
+.badge-expand12{
+    color: #2d586c;background:#fdd49a
+}
+.badge-expand13{
+    color: white;background:#ff6600
+}
+.badge-expand14{
+    color: #2d586c;background:#fbc2c4
+}
+.badge-expand15{
+    color: #2d586c;background:#d6e9c6
+}
+.badge-expand16{
+    color: #2d586c;background:#c6ffc6
+}.badge-expand17{
+     color: white;background:#c7254e
+ }
+.badge-expand18{
+    color: white;background:#27615d
+}
+.badge-expand19{
+    color: white;background:#3a96dc
+}
+.badge-expand20{
+    color: white;background:#6cbffc
+}
+.badge-expand21{
+    color: white;background:#1890ff
+}
+
+.optStyle{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+

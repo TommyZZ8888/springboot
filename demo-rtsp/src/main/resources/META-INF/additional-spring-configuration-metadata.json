@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "rtsp.url",
+      "type": "java.lang.String",
+      "description": "Description for rtsp.url."
+    },
+    {
+      "name": "rtsp.transport.type",
+      "type": "java.lang.String",
+      "description": "Description for rtsp.transport.type."
+    }
+  ] }

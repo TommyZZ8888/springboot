@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.notice-box {
+    display: none;
+    justify-content: start;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 250px;
+    height: 80px;
+    box-shadow: 0 0 4px #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+    position: fixed;
+    right: -250px;
+    background: #ffffff;
+    top: 100px;
+}
+.icon-chenggong {
+    color: rgba(10, 167, 60, 0.88);
+    font-size: 20px!important;
+}
+.notice-box>div {
+    font-size: 14px;
+    margin-left: 5px;
+}
