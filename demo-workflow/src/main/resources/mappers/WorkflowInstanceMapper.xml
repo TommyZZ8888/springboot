@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.zz.demoworkflow.simple.mapper.WorkflowInstanceMapper">
+  <resultMap id="BaseResultMap" type="com.www.zz.demoworkflow.simple.domain.entity.WorkflowInstanceEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="workflow_id" jdbcType="INTEGER" property="workflowId" />
+    <result column="business_key" jdbcType="VARCHAR" property="businessKey" />
+    <result column="business_type" jdbcType="VARCHAR" property="businessType" />
+    <result column="status" jdbcType="OTHER" property="status" />
+    <result column="starter_id" jdbcType="INTEGER" property="starterId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="current_node_id" jdbcType="INTEGER" property="currentNodeId" />
+    <result column="variables" jdbcType="OTHER" property="variables" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, workflow_id, business_key, business_type, `status`, starter_id, start_time, end_time, 
+    current_node_id, `variables`, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from workflow_instance
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from workflow_instance
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowInstanceEntity" useGeneratedKeys="true">
+    insert into workflow_instance (workflow_id, business_key, business_type, 
+      `status`, starter_id, start_time, 
+      end_time, current_node_id, `variables`, 
+      created_at, updated_at)
+    values (#{workflowId,jdbcType=INTEGER}, #{businessKey,jdbcType=VARCHAR}, #{businessType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=OTHER}, #{starterId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{currentNodeId,jdbcType=INTEGER}, #{variables,jdbcType=OTHER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowInstanceEntity" useGeneratedKeys="true">
+    insert into workflow_instance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workflowId != null">
+        workflow_id,
+      </if>
+      <if test="businessKey != null">
+        business_key,
+      </if>
+      <if test="businessType != null">
+        business_type,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="starterId != null">
+        starter_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="currentNodeId != null">
+        current_node_id,
+      </if>
+      <if test="variables != null">
+        `variables`,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workflowId != null">
+        #{workflowId,jdbcType=INTEGER},
+      </if>
+      <if test="businessKey != null">
+        #{businessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=OTHER},
+      </if>
+      <if test="starterId != null">
+        #{starterId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentNodeId != null">
+        #{currentNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="variables != null">
+        #{variables,jdbcType=OTHER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowInstanceEntity">
+    update workflow_instance
+    <set>
+      <if test="workflowId != null">
+        workflow_id = #{workflowId,jdbcType=INTEGER},
+      </if>
+      <if test="businessKey != null">
+        business_key = #{businessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null">
+        business_type = #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=OTHER},
+      </if>
+      <if test="starterId != null">
+        starter_id = #{starterId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentNodeId != null">
+        current_node_id = #{currentNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="variables != null">
+        `variables` = #{variables,jdbcType=OTHER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowInstanceEntity">
+    update workflow_instance
+    set workflow_id = #{workflowId,jdbcType=INTEGER},
+      business_key = #{businessKey,jdbcType=VARCHAR},
+      business_type = #{businessType,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=OTHER},
+      starter_id = #{starterId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      current_node_id = #{currentNodeId,jdbcType=INTEGER},
+      `variables` = #{variables,jdbcType=OTHER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

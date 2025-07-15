@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.zz.demoworkflow.simple.mapper.WorkflowTransitionMapper">
+  <resultMap id="BaseResultMap" type="com.www.zz.demoworkflow.simple.domain.entity.WorkflowTransitionEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="workflow_id" jdbcType="INTEGER" property="workflowId" />
+    <result column="from_node_id" jdbcType="INTEGER" property="fromNodeId" />
+    <result column="to_node_id" jdbcType="INTEGER" property="toNodeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="condition_expression" jdbcType="VARCHAR" property="conditionExpression" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, workflow_id, from_node_id, to_node_id, `name`, condition_expression, priority, 
+    created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from workflow_transition
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from workflow_transition
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowTransitionEntity" useGeneratedKeys="true">
+    insert into workflow_transition (workflow_id, from_node_id, to_node_id, 
+      `name`, condition_expression, priority, 
+      created_at, updated_at)
+    values (#{workflowId,jdbcType=INTEGER}, #{fromNodeId,jdbcType=INTEGER}, #{toNodeId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{conditionExpression,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowTransitionEntity" useGeneratedKeys="true">
+    insert into workflow_transition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workflowId != null">
+        workflow_id,
+      </if>
+      <if test="fromNodeId != null">
+        from_node_id,
+      </if>
+      <if test="toNodeId != null">
+        to_node_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="conditionExpression != null">
+        condition_expression,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workflowId != null">
+        #{workflowId,jdbcType=INTEGER},
+      </if>
+      <if test="fromNodeId != null">
+        #{fromNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="toNodeId != null">
+        #{toNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionExpression != null">
+        #{conditionExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowTransitionEntity">
+    update workflow_transition
+    <set>
+      <if test="workflowId != null">
+        workflow_id = #{workflowId,jdbcType=INTEGER},
+      </if>
+      <if test="fromNodeId != null">
+        from_node_id = #{fromNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="toNodeId != null">
+        to_node_id = #{toNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionExpression != null">
+        condition_expression = #{conditionExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowTransitionEntity">
+    update workflow_transition
+    set workflow_id = #{workflowId,jdbcType=INTEGER},
+      from_node_id = #{fromNodeId,jdbcType=INTEGER},
+      to_node_id = #{toNodeId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      condition_expression = #{conditionExpression,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

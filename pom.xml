@@ -49,6 +49,7 @@
         <module>demo-mongodb</module>
         <module>demo-search-rediSearch</module>
         <module>demo-cache-caffeine</module>
+        <module>demo-workflow</module>
     </modules>
 
     <properties>
