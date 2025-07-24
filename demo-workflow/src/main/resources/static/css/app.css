@@ -1,0 +1,13 @@
+.container {
+    max-width: 1200px;
+}
+table {
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #e5e7eb;
+    text-align: left;
+}
+button:hover {
+    opacity: 0.9;
+}

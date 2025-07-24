@@ -1,169 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.www.zz.demoworkflow.simple.mapper.WorkflowNodeMapper">
-  <resultMap id="BaseResultMap" type="com.www.zz.demoworkflow.simple.domain.entity.WorkflowNodeEntity">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="workflow_id" jdbcType="INTEGER" property="workflowId" />
-    <result column="node_key" jdbcType="VARCHAR" property="nodeKey" />
-    <result column="node_name" jdbcType="VARCHAR" property="nodeName" />
-    <result column="node_type" jdbcType="OTHER" property="nodeType" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="position_x" jdbcType="INTEGER" property="positionX" />
-    <result column="position_y" jdbcType="INTEGER" property="positionY" />
-    <result column="config" jdbcType="OTHER" property="config" />
-    <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, workflow_id, node_key, node_name, node_type, description, position_x, position_y, 
+    <resultMap id="BaseResultMap" type="com.www.zz.demoworkflow.simple.domain.entity.WorkflowNodeEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="workflow_id" jdbcType="INTEGER" property="workflowId"/>
+        <result column="node_key" jdbcType="VARCHAR" property="nodeKey"/>
+        <result column="node_name" jdbcType="VARCHAR" property="nodeName"/>
+        <result column="node_type" jdbcType="OTHER" property="nodeType"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="position_x" jdbcType="INTEGER" property="positionX"/>
+        <result column="position_y" jdbcType="INTEGER" property="positionY"/>
+        <result column="config" jdbcType="OTHER" property="config"/>
+        <result column="sort_order" jdbcType="INTEGER" property="sortOrder"/>
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        , workflow_id, node_key, node_name, node_type, description, position_x, position_y,
     config, sort_order, created_at, updated_at
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from workflow_node
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from workflow_node
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowNodeEntity" useGeneratedKeys="true">
-    insert into workflow_node (workflow_id, node_key, node_name, 
-      node_type, description, position_x, 
-      position_y, config, sort_order, 
-      created_at, updated_at)
-    values (#{workflowId,jdbcType=INTEGER}, #{nodeKey,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, 
-      #{nodeType,jdbcType=OTHER}, #{description,jdbcType=VARCHAR}, #{positionX,jdbcType=INTEGER}, 
-      #{positionY,jdbcType=INTEGER}, #{config,jdbcType=OTHER}, #{sortOrder,jdbcType=INTEGER}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowNodeEntity" useGeneratedKeys="true">
-    insert into workflow_node
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="workflowId != null">
-        workflow_id,
-      </if>
-      <if test="nodeKey != null">
-        node_key,
-      </if>
-      <if test="nodeName != null">
-        node_name,
-      </if>
-      <if test="nodeType != null">
-        node_type,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="positionX != null">
-        position_x,
-      </if>
-      <if test="positionY != null">
-        position_y,
-      </if>
-      <if test="config != null">
-        config,
-      </if>
-      <if test="sortOrder != null">
-        sort_order,
-      </if>
-      <if test="createdAt != null">
-        created_at,
-      </if>
-      <if test="updatedAt != null">
-        updated_at,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="workflowId != null">
-        #{workflowId,jdbcType=INTEGER},
-      </if>
-      <if test="nodeKey != null">
-        #{nodeKey,jdbcType=VARCHAR},
-      </if>
-      <if test="nodeName != null">
-        #{nodeName,jdbcType=VARCHAR},
-      </if>
-      <if test="nodeType != null">
-        #{nodeType,jdbcType=OTHER},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="positionX != null">
-        #{positionX,jdbcType=INTEGER},
-      </if>
-      <if test="positionY != null">
-        #{positionY,jdbcType=INTEGER},
-      </if>
-      <if test="config != null">
-        #{config,jdbcType=OTHER},
-      </if>
-      <if test="sortOrder != null">
-        #{sortOrder,jdbcType=INTEGER},
-      </if>
-      <if test="createdAt != null">
-        #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowNodeEntity">
-    update workflow_node
-    <set>
-      <if test="workflowId != null">
-        workflow_id = #{workflowId,jdbcType=INTEGER},
-      </if>
-      <if test="nodeKey != null">
-        node_key = #{nodeKey,jdbcType=VARCHAR},
-      </if>
-      <if test="nodeName != null">
-        node_name = #{nodeName,jdbcType=VARCHAR},
-      </if>
-      <if test="nodeType != null">
-        node_type = #{nodeType,jdbcType=OTHER},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="positionX != null">
-        position_x = #{positionX,jdbcType=INTEGER},
-      </if>
-      <if test="positionY != null">
-        position_y = #{positionY,jdbcType=INTEGER},
-      </if>
-      <if test="config != null">
-        config = #{config,jdbcType=OTHER},
-      </if>
-      <if test="sortOrder != null">
-        sort_order = #{sortOrder,jdbcType=INTEGER},
-      </if>
-      <if test="createdAt != null">
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.www.zz.demoworkflow.simple.domain.entity.WorkflowNodeEntity">
-    update workflow_node
-    set workflow_id = #{workflowId,jdbcType=INTEGER},
-      node_key = #{nodeKey,jdbcType=VARCHAR},
-      node_name = #{nodeName,jdbcType=VARCHAR},
-      node_type = #{nodeType,jdbcType=OTHER},
-      description = #{description,jdbcType=VARCHAR},
-      position_x = #{positionX,jdbcType=INTEGER},
-      position_y = #{positionY,jdbcType=INTEGER},
-      config = #{config,jdbcType=OTHER},
-      sort_order = #{sortOrder,jdbcType=INTEGER},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    </sql>
+
+
 </mapper>

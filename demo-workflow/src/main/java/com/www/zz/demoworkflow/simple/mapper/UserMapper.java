@@ -1,17 +1,15 @@
 package com.www.zz.demoworkflow.simple.mapper;
 
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.www.zz.demoworkflow.simple.domain.entity.UserEntity;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(UserEntity record);
-
-    int insertSelective(UserEntity record);
-
-    UserEntity selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(UserEntity record);
-
-    int updateByPrimaryKey(UserEntity record);
+/**
+ * @Describtion: UserMapper
+ * @Author: 张卫刚
+ * @Date: 2025/7/24 11:14
+ */
+@Mapper
+public interface UserMapper extends BaseMapper<UserEntity> {
 }

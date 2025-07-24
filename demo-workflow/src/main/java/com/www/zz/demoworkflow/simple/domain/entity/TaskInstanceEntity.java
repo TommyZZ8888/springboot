@@ -2,12 +2,15 @@ package com.www.zz.demoworkflow.simple.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * task_instance
  * @author 
  */
+@TableName("task_instance")
 @Data
 public class TaskInstanceEntity implements Serializable {
     /**

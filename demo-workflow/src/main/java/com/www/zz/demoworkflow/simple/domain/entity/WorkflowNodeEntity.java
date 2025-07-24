@@ -2,12 +2,15 @@ package com.www.zz.demoworkflow.simple.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * workflow_node
  * @author 
  */
+@TableName("workflow_node")
 @Data
 public class WorkflowNodeEntity implements Serializable {
     /**

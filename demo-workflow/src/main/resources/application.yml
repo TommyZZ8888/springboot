@@ -14,7 +14,10 @@ spring:
             pool-name: SpringBootDemoHikariCP
             max-lifetime: 60000
             connection-timeout: 30000
-
+    thymeleaf:
+        cache: false
+        prefix: classpath:/templates/
+        suffix: .html
 mybatis-plus:
     mapper-locations: classpath:mappers/*.xml
     type-aliases-package: com.www.zz.demoworkflow.simple.domain.entity
@@ -28,3 +31,5 @@ mybatis-plus:
 logging:
     level:
         com.www: debug
+server:
+    port: 8080

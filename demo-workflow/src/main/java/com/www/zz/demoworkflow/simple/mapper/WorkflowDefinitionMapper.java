@@ -1,17 +1,14 @@
 package com.www.zz.demoworkflow.simple.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.www.zz.demoworkflow.simple.domain.entity.WorkflowDefinitionEntity;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface WorkflowDefinitionMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(WorkflowDefinitionEntity record);
-
-    int insertSelective(WorkflowDefinitionEntity record);
-
-    WorkflowDefinitionEntity selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(WorkflowDefinitionEntity record);
-
-    int updateByPrimaryKey(WorkflowDefinitionEntity record);
+/**
+ * @Describtion: WorkflowDefinitionMapper
+ * @Author: 张卫刚
+ * @Date: 2025/7/24 11:15
+ */
+@Mapper
+public interface WorkflowDefinitionMapper extends BaseMapper<WorkflowDefinitionEntity> {
 }

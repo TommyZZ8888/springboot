@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作流管理</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.4.0/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div id="app" class="container mx-auto p-4">
+    <!-- 流程定义列表 -->
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold mb-4">流程定义</h2>
+        <button @click="showCreateDefinitionModal = true" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">创建流程定义</button>
+        <table class="w-full bg-white shadow rounded">
+            <thead>
+            <tr class="bg-gray-200">
+                <th class="p-2">ID</th>
+                <th class="p-2">名称</th>
+                <th class="p-2">描述</th>
+                <th class="p-2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="definition in definitions" :key="definition.id">
+                <td class="p-2">{{ definition.id }}</td>
+                <td class="p-2">{{ definition.name }}</td>
+                <td class="p-2">{{ definition.description }}</td>
+                <td class="p-2">
+                    <button @click="openStartWorkflowModal(definition.id)" class="text-blue-500">发起流程</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 待办任务列表 -->
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold mb-4">我的待办任务</h2>
+        <table class="w-full bg-white shadow rounded">
+            <thead>
+            <tr class="bg-gray-200">
+                <th class="p-2">任务ID</th>
+                <th class="p-2">任务名称</th>
+                <th class="p-2">流程实例ID</th>
+                <th class="p-2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="task in tasks" :key="task.id">
+                <td class="p-2">{{ task.id }}</td>
+                <td class="p-2">{{ task.taskName }}</td>
+                <td class="p-2">{{ task.instanceId }}</td>
+                <td class="p-2">
+                    <button @click="openCompleteTaskModal(task.id, task.taskName)" class="text-blue-500">处理</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 创建流程定义模态框 -->
+    <div v-if="showCreateDefinitionModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded shadow-lg w-1/3">
+            <h3 class="text-xl font-bold mb-4">创建流程定义</h3>
+            <form @submit.prevent="createDefinition">
+                <div class="mb-4">
+                    <label class="block mb-1">名称</label>
+                    <input v-model="newDefinition.name" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-1">描述</label>
+                    <textarea v-model="newDefinition.description" class="w-full p-2 border rounded"></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" @click="showCreateDefinitionModal = false" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">取消</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">创建</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 发起流程模态框 -->
+    <div v-if="showStartWorkflowModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded shadow-lg w-1/3">
+            <h3 class="text-xl font-bold mb-4">发起流程</h3>
+            <form @submit.prevent="startWorkflow">
+                <div class="mb-4">
+                    <label class="block mb-1">业务KEY</label>
+                    <input v-model="newWorkflow.businessKey" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-1">请假天数</label>
+                    <input v-model.number="newWorkflow.variables.days" type="number" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-1">请假原因</label>
+                    <textarea v-model="newWorkflow.variables.reason" class="w-full p-2 border rounded"></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" @click="showStartWorkflowModal = false" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">取消</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">发起</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 处理任务模态框 -->
+    <div v-if="showCompleteTaskModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded shadow-lg w-1/3">
+            <h3 class="text-xl font-bold mb-4">处理任务: {{ currentTaskName }}</h3>
+            <form @submit.prevent="completeTask">
+                <div class="mb-4">
+                    <label class="block mb-1">审批结果</label>
+                    <select v-model="taskForm.status" class="w-full p-2 border rounded" required>
+                        <option value="approved">通过</option>
+                        <option value="rejected">驳回</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-1">审批意见</label>
+                    <textarea v-model="taskForm.comments" class="w-full p-2 border rounded"></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" @click="showCompleteTaskModal = false" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">取消</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const { createApp, ref, onMounted } = Vue;
+
+    createApp({
+        setup() {
+            axios.defaults.baseURL = 'http://localhost:8080';
+
+            const definitions = ref([]);
+            const tasks = ref([]);
+            const showCreateDefinitionModal = ref(false);
+            const showStartWorkflowModal = ref(false);
+            const showCompleteTaskModal = ref(false);
+            const newDefinition = ref({ name: '', description: '', createdBy: 1001 });
+            const newWorkflow = ref({
+                workflowId: null,
+                businessKey: '',
+                businessType: 'leave_application',
+                starterId: 1001,
+                variables: { days: 1, reason: '' }
+            });
+            const taskForm = ref({ taskId: null, operatorId: 2001, status: 'approved', comments: '' });
+            const currentTaskName = ref('');
+            const fetchDefinitions = async () => {
+                try {
+                    const response = await axios.get('/workflow/definitions');
+                    definitions.value = response.data;
+                } catch (error) {
+                    console.error('Failed to fetch definitions:', error);
+                }
+            };
+
+            const fetchTasks = async () => {
+                try {
+                    const response = await axios.get('/workflow/tasks?assigneeId=2001');
+                    tasks.value = response.data;
+                } catch (error) {
+                    console.error('Failed to fetch tasks:', error);
+                }
+            };
+
+            const createDefinition = async () => {
+                try {
+                    await axios.post('/workflow/definition', newDefinition.value);
+                    showCreateDefinitionModal.value = false;
+                    newDefinition.value = { name: '', description: '', createdBy: 1001 };
+                    fetchDefinitions();
+                } catch (error) {
+                    console.error('Failed to create definition:', error);
+                }
+            };
+
+            const openStartWorkflowModal = (workflowId) => {
+                newWorkflow.value.workflowId = workflowId;
+                showStartWorkflowModal.value = true;
+            };
+
+            const startWorkflow = async () => {
+                try {
+                    await axios.post('/workflow/start', newWorkflow.value.variables, {
+                        params: {
+                            workflowId: newWorkflow.value.workflowId,
+                            businessKey: newWorkflow.value.businessKey,
+                            businessType: newWorkflow.value.businessType,
+                            starterId: newWorkflow.value.starterId
+                        }
+                    });
+                    showStartWorkflowModal.value = false;
+                    newWorkflow.value = {
+                        workflowId: null,
+                        businessKey: '',
+                        businessType: 'leave_application',
+                        starterId: 1001,
+                        variables: { days: 1, reason: '' }
+                    };
+                    fetchTasks();
+                } catch (error) {
+                    console.error('Failed to start workflow:', error);
+                }
+            };
+
+            const openCompleteTaskModal = (taskId, taskName) => {
+                taskForm.value.taskId = taskId;
+                currentTaskName.value = taskName;
+                showCompleteTaskModal.value = true;
+            };
+
+            const completeTask = async () => {
+                try {
+                    await axios.post('/workflow/complete', { approval_result: taskForm.value.status, comment: taskForm.value.comments }, {
+                        params: {
+                            taskId: taskForm.value.taskId,
+                            operatorId: taskForm.value.operatorId,
+                            status: taskForm.value.status,
+                            comments: taskForm.value.comments
+                        }
+                    });
+                    showCompleteTaskModal.value = false;
+                    taskForm.value = { taskId: null, operatorId: 2001, status: 'approved', comments: '' };
+                    fetchTasks();
+                } catch (error) {
+                    console.error('Failed to complete task:', error);
+                }
+            };
+
+            onMounted(() => {
+                fetchDefinitions();
+                fetchTasks();
+            });
+
+            return {
+                definitions,
+                tasks,
+                showCreateDefinitionModal,
+                showStartWorkflowModal,
+                showCompleteTaskModal,
+                newDefinition,
+                newWorkflow,
+                taskForm,
+                currentTaskName,
+                createDefinition,
+                openStartWorkflowModal,
+                startWorkflow,
+                openCompleteTaskModal,
+                completeTask
+            };
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

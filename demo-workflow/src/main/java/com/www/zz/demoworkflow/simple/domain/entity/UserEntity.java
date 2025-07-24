@@ -2,12 +2,15 @@ package com.www.zz.demoworkflow.simple.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * user
  * @author 
  */
+@TableName("user")
 @Data
 public class UserEntity implements Serializable {
     /**
