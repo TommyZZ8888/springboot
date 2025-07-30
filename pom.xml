@@ -50,6 +50,7 @@
         <module>demo-search-rediSearch</module>
         <module>demo-cache-caffeine</module>
         <module>demo-workflow</module>
+        <module>demo-es</module>
     </modules>
 
     <properties>
