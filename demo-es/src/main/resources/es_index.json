@@ -1,0 +1,33 @@
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "ik_max_word_analyzer": {
+            "type": "custom",
+            "tokenizer": "ik_max_word"
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "ik_max_word_analyzer",
+        "search_analyzer": "ik_max_word_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,64 @@
+{
+  "order": 0,
+  "template": "sample_info*",
+  "settings": {
+    "index": {
+      "max_result_window": 100000000,
+      "analysis": {
+        "analyzer": {
+          "ik_ty": {
+            "type": "custom",
+            "tokenizer": "ik_max_word",
+            "filter": [
+              "my_ty_filter"
+            ]
+          },
+          "ik_ty_smart": {
+            "type": "custom",
+            "tokenizer": "ik_smart",
+            "filter": [
+              "my_ty_filter"
+            ]
+          }
+        },
+        "filter": {
+          "my_ty_filter": {
+            "type": "dynamic_synonym",
+            "synonyms_path": "fromDB"
+          }
+        }
+      },
+      "number_of_shards": "3",
+      "number_of_replicas": "0",
+      "refresh_interval": "5s"
+    }
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "analyzer": "ik_ty",
+        "search_analyzer": "ik_ty",
+        "type": "text"
+      },
+      "id": {
+        "analyzer": "ik_ty",
+        "type": "text"
+      },
+      "departname": {
+        "analyzer": "ik_ty",
+        "type": "text"
+      },
+      "rank": {
+        "analyzer": "ik_ty",
+        "type": "text"
+      },
+     "carNum": {
+       "type": "text"
+     },
+      "sortNum": {
+        "type": "integer"
+      }
+    }
+  },
+  "aliases": {}
+}

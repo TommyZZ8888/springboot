@@ -1,14 +1,3 @@
-spring:
-    elasticsearch:
-        username:
-        password:
-        # ??????
-        read-timeout: 30s
-        # es rest ????????????
-        uris: 127.0.0.1:9200
-        connection-timeout: 50s
-        socket-timeout: 60s
-        
 es:
     schema: http
     enable: true
@@ -21,3 +10,6 @@ es:
             config-path: es_index.json # ?????????
 server:
     port: 8080
+logging:
+    level:
+        tracer: TRACE
