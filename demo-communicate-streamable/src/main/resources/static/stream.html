@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Streamable HTTP 示例</title>
+</head>
+<body>
+
+<h3>Streamable HTTP 流式返回演示</h3>
+
+<input id="prompt" value="你好 AI" />
+<button onclick="start()">开始</button>
+
+<pre id="output"></pre>
+
+<script>
+    async function start() {
+        const output = document.getElementById("output");
+        output.innerText = "";
+
+        const resp = await fetch("/stream/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                prompt: document.getElementById("prompt").value
+            })
+        });
+
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+
+        let buffer = "";
+
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+
+            // ✅ 按行解析（和后端 \n 对应）
+            const lines = buffer.split("\n");
+            buffer = lines.pop();
+
+            for (const line of lines) {
+                if (!line.trim()) continue;
+                const json = JSON.parse(line);
+
+                if (json.done) {
+                    output.innerText += "\n--- 结束 ---\n";
+                } else {
+                    output.innerText += json.delta + "\n";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
