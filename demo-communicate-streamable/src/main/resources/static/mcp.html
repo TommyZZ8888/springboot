@@ -1,0 +1,70 @@
+<meta charset="UTF-8">
+
+
+<button onclick="init()">1. 初始化会话</button>
+<button onclick="send()">2. 普通通信</button>
+<button onclick="stream()">3. Streamable HTTP</button>
+<button onclick="openSse()">4. 打开 SSE</button>
+<button onclick="resume()">5. 连接恢复</button>
+
+<pre id="log"></pre>
+
+<script>
+    let sid = null;
+    const log = msg => document.getElementById("log").innerText += msg + "\n";
+
+    /* 1️⃣ 初始化 */
+    async function init() {
+        const r = await fetch("/mcp/init", { method: "POST" });
+        const j = await r.json();
+        sid = j.sessionId;
+        log("session=" + sid);
+    }
+
+    /* 2️⃣ 普通通信 */
+    async function send() {
+        const r = await fetch("/mcp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionId: sid, content: "hello" })
+        });
+        const j = await r.json();
+        log("reply=" + j.reply);
+    }
+
+    /* 3️⃣ Streamable HTTP */
+    async function stream() {
+        const res = await fetch("/mcp/stream", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionId: sid, content: "stream" })
+        });
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = "";
+
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buf += decoder.decode(value, { stream: true });
+            const lines = buf.split("\n");
+            buf = lines.pop();
+
+            lines.forEach(l => log("stream:" + l));
+        }
+    }
+
+    /* 4️⃣ SSE */
+    function openSse() {
+        const es = new EventSource("/mcp/sse?sessionId=" + sid);
+        es.onmessage = e => log("sse:" + e.data);
+    }
+
+    /* 5️⃣ 连接恢复 */
+    async function resume() {
+        const r = await fetch("/mcp/resume?sessionId=" + sid);
+        const j = await r.json();
+        log("recovered=" + JSON.stringify(j.recoveredMessages));
+    }
+</script>

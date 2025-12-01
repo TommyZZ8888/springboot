@@ -13,7 +13,7 @@
 </html>
 <script>
     window.onload = () => {
-        let eventSource = new EventSource("http://localhost:8080/demo/sse/subscribe");
+        let eventSource = new EventSource("http://localhost:8081/demo/sse/subscribe");
         eventSource.addEventListener("test", (res) => {
             console.log("test:", res);
         })
